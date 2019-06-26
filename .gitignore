@@ -1,0 +1,5 @@
+#ignore testfiles
+*.txt
+.DS_Store
+*.a
+*.o

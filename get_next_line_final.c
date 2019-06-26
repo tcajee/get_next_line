@@ -6,7 +6,7 @@
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 10:15:46 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/26 17:19:00 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/06/26 11:31:53 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ static int	find_new_line(t_files *files, int fd, char **file)
 			break ;
 		if (bytes < 0)
 			return (-1);
-		files->stage = ft_strjoin(file[fd],\
-				ft_memset(files->buffer + bytes, '\0', 1) - bytes);
+		files->buffer[bytes] = '\0';
+		files->stage = ft_strjoin(file[fd], files->buffer);
 		ft_strdel(&file[fd]);
 		file[fd] = ft_strdup(files->stage);
 		ft_strdel(&files->stage);
@@ -41,15 +41,18 @@ int			get_next_line(const int fd, char **line)
 		return (-1);
 	if (ft_strchr(files.file[fd], '\n') != NULL)
 	{
-		files.stage = ft_strdup(files.file[fd]);
-		*line = ft_strdup(ft_memset(ft_strchr(\
-						files.stage, '\n'), '\0', 1) - ft_strlen(files.stage));
+		*line = ft_strdup((ft_memset(ft_strchr(files.stage\
+							= ft_strdup(files.file[fd]), '\n'),'\0', 1) - \
+					ft_strlen(files.stage)));
 		ft_strdel(&files.file[fd]);
 		files.file[fd] = ft_strdup(ft_strchr(files.stage, '\0') + 1);
 		ft_strdel(&files.stage);
 	}
-	else if ((*line = ft_strdup(files.file[fd])) && files.file[fd][0])
+	else if (ft_strlen(files.file[fd]) > 0)
+	{
+		*line = ft_strdup(files.file[fd]);
 		ft_strdel(&files.file[fd]);
+	}
 	else
 		return (0);
 	return (1);

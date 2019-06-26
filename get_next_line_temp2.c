@@ -6,50 +6,57 @@
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 10:15:46 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/26 17:19:00 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/06/26 11:31:39 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	find_new_line(t_files *files, int fd, char **file)
+static int	find_new_line(int fd, char **files)
 {
+	char	*store;
 	int		bytes;
+	char	buffer[BUFF_SIZE + 1];
 
-	if (!file[fd])
-		file[fd] = ft_strnew(0);
-	while (ft_strchr(file[fd], '\n') == NULL)
+	if (!files[fd])
+		files[fd] = ft_strnew(0);
+	while (ft_strchr(files[fd], '\n') == NULL)
 	{
-		if ((bytes = read(fd, files->buffer, BUFF_SIZE)) == 0)
+		if ((bytes = read(fd, buffer, BUFF_SIZE)) == 0)
 			break ;
 		if (bytes < 0)
 			return (-1);
-		files->stage = ft_strjoin(file[fd],\
-				ft_memset(files->buffer + bytes, '\0', 1) - bytes);
-		ft_strdel(&file[fd]);
-		file[fd] = ft_strdup(files->stage);
-		ft_strdel(&files->stage);
+		buffer[bytes] = '\0';
+		store = ft_strjoin(files[fd], buffer);
+		ft_strdel(&files[fd]);
+		files[fd] = ft_strdup(store);
+		ft_strdel(&store);
 	}
 	return (0);
 }
 
 int			get_next_line(const int fd, char **line)
 {
-	static t_files files;
+	static char	*files[1024];
+	char		*copy;
+	char		*next;
 
-	if (fd < 0 || !line || find_new_line(&files, fd, files.file) < 0)
+	if (fd < 0 || !line || find_new_line(fd, files) < 0)
 		return (-1);
-	if (ft_strchr(files.file[fd], '\n') != NULL)
+	if (ft_strchr(files[fd], '\n') != NULL)
 	{
-		files.stage = ft_strdup(files.file[fd]);
-		*line = ft_strdup(ft_memset(ft_strchr(\
-						files.stage, '\n'), '\0', 1) - ft_strlen(files.stage));
-		ft_strdel(&files.file[fd]);
-		files.file[fd] = ft_strdup(ft_strchr(files.stage, '\0') + 1);
-		ft_strdel(&files.stage);
+		copy = ft_strdup(files[fd]);
+		ft_strdel(&files[fd]);
+		next = ft_memset(ft_strchr(copy, '\n'), '\0', 1) + 1;
+		*line = ft_strdup(copy);
+		files[fd] = ft_strdup(next);
+		ft_strdel(&copy);
 	}
-	else if ((*line = ft_strdup(files.file[fd])) && files.file[fd][0])
-		ft_strdel(&files.file[fd]);
+	else if (ft_strlen(files[fd]) > 0)
+	{
+		*line = ft_strdup(files[fd]);
+		ft_strdel(&files[fd]);
+	}
 	else
 		return (0);
 	return (1);
