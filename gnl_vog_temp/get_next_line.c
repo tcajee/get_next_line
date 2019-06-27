@@ -18,6 +18,8 @@ static int	find_new_line(t_files *files, int fd)
 
 	while (ft_strchr(files->file[fd], '\n') == NULL)
 	{
+		if (!(files->buffer = (char *)malloc(sizeof(char) * BUFF_SIZE + 1)))
+			return (-1);
 		if ((bytes = read(fd, files->buffer, BUFF_SIZE)) == 0)
 			break ;
 		if (bytes < 0)

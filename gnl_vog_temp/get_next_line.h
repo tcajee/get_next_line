@@ -18,7 +18,7 @@
 typedef struct	s_files
 {
 	char		*file[1024];
-	char		buffer[BUFF_SIZE + 1];
+	char		*buffer;
 	char		*stage;
 	char		*line;
 }				t_files;
