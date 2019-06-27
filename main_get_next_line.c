@@ -6,7 +6,7 @@
 /*   By: tcajee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 17:29:40 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/25 18:32:30 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/06/27 10:14:15 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	find_new_line(t_files *files, int fd, char **file)
 		file[fd] = ft_strdup(files->stage);
 		ft_strdel(&files->stage);
 	}
-	return (0);
+	return (1);
 }
 
 int			get_next_line(const int fd, char **line)
@@ -54,7 +54,10 @@ int			get_next_line(const int fd, char **line)
 	else if ((*line = ft_strdup(files.file[fd])) && files.file[fd][0])
 		ft_strdel(&files.file[fd]);
 	else
+	{
+		ft_strdel(&files.file[fd]);
 		return (0);
+	}
 	return (1);
 }
 //---<int main(void)>--------------------------------------------------------{{{
@@ -62,12 +65,17 @@ int			get_next_line(const int fd, char **line)
 int main(void)
 {
 	char	*line = NULL;
+	int x = 1;
 	int fd = open("./test.txt", O_RDONLY);
 
 	if (!fd)
 		return (-99);
-	if (get_next_line(fd, &line) > 0)
+	while (x > 0)
+	{
+		x = get_next_line(-42, &line);
+		printf("x: %d\n", x);
 		printf("line: %s\n", line);
+	}
 	ft_strdel(&line);
 	close(fd);
 	return (0);

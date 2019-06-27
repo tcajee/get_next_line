@@ -6,7 +6,7 @@
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 10:15:46 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/26 17:19:00 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/06/27 10:19:03 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int	find_new_line(t_files *files, int fd, char **file)
 		file[fd] = ft_strdup(files->stage);
 		ft_strdel(&files->stage);
 	}
-	return (0);
+	return (1);
 }
 
 int			get_next_line(const int fd, char **line)
@@ -51,6 +51,9 @@ int			get_next_line(const int fd, char **line)
 	else if ((*line = ft_strdup(files.file[fd])) && files.file[fd][0])
 		ft_strdel(&files.file[fd]);
 	else
+	{
+		ft_strdel(&files.file[fd]);
 		return (0);
+	}
 	return (1);
 }
