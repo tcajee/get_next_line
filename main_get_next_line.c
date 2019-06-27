@@ -12,77 +12,66 @@
 
 #include "get_next_line.h"
 #include <stdio.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
-//---<char *find_new_line(char *BUFF)>-------------------------------------{{{
-// fcntl(fd, F_GETFD)␣
-static int	find_new_line(int fd, char **files)
+static int	find_new_line(t_files *files, int fd, char **file)
 {
-	char	*temp;
 	int		bytes;
-	char	buffer[BUFF_SIZE + 1];
 
-	if (files[fd] == NULL)
-		files[fd] = ft_strnew(0);
-	while (ft_strchr(files[fd], '\n') == NULL)
+	if (!file[fd])
+		file[fd] = ft_strnew(0);
+	while (ft_strchr(file[fd], '\n') == NULL)
 	{
-		if ((bytes = read(fd, buffer, BUFF_SIZE)) == 0)
+		if ((bytes = read(fd, files->buffer, BUFF_SIZE)) == 0)
 			break ;
 		if (bytes < 0)
 			return (-1);
-		buffer[bytes] = '\0';
-		temp = ft_strjoin(files[fd], buffer);
-		ft_strdel(&files[fd]);
-		files[fd] = ft_strdup(temp);
-		ft_strdel(&temp);
+		files->stage = ft_strjoin(file[fd],\
+				ft_memset(files->buffer + bytes, '\0', 1) - bytes);
+		ft_strdel(&file[fd]);
+		file[fd] = ft_strdup(files->stage);
+		ft_strdel(&files->stage);
 	}
 	return (0);
 }
-//}}}
 
-//---<int	get_next_line(const int fd, char **line)>------------------------{{{
-
-int	get_next_line(const int fd, char **line)
+int			get_next_line(const int fd, char **line)
 {
-	static char	*files[1024];
-	char		*temp;
-	char		*temp2;
-	
-	if (fd < 0 || !line || find_new_line(fd, files) < 0)
+	static t_files files;
+
+	if (fd < 0 || !line || find_new_line(&files, fd, files.file) < 0)
 		return (-1);
-	if (ft_strchr(files[fd], '\n') != NULL)
+	if (ft_strchr(files.file[fd], '\n') != NULL)
 	{
-		temp = ft_strdup(files[fd]);
-		ft_strdel(&files[fd]);
-		temp2 = ft_memset(ft_strchr(temp, '\n'), '\0', 1) + 1;
-		*line = ft_strdup(temp);
-		files[fd] = ft_strdup(temp2);
-		ft_strdel(&temp);
+		files.stage = ft_strdup(files.file[fd]);
+		*line = ft_strdup(ft_memset(ft_strchr(\
+						files.stage, '\n'), '\0', 1) - ft_strlen(files.stage));
+		ft_strdel(&files.file[fd]);
+		files.file[fd] = ft_strdup(ft_strchr(files.stage, '\0') + 1);
+		ft_strdel(&files.stage);
 	}
-	else if (ft_strlen(files[fd]) > 0)
-	{
-		*line = ft_strdup(files[fd]);
-		ft_strdel(&files[fd]);
-	}
+	else if ((*line = ft_strdup(files.file[fd])) && files.file[fd][0])
+		ft_strdel(&files.file[fd]);
 	else
 		return (0);
 	return (1);
 }
-
-//}}}
-
 //---<int main(void)>--------------------------------------------------------{{{
 
 int main(void)
 {
 	char	*line = NULL;
-	FILE	*fd = fopen("./one_big_fat_line.txt", "r");
+	int fd = open("./test.txt", O_RDONLY);
 
 	if (!fd)
 		return (-99);
-	while (get_next_line(fileno(fd), &line) > 0)
+	if (get_next_line(fd, &line) > 0)
 		printf("line: %s\n", line);
-	fclose(fd);
+	ft_strdel(&line);
+	close(fd);
 	return (0);
 }
 
 //}}}
+

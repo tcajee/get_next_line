@@ -15,14 +15,14 @@
 # define BUFF_SIZE 512
 # include "./libft/libft.h"
 
-typedef struct s_files
+typedef struct	s_files
 {
-	char	*file[1024];
-	char 	buffer[BUFF_SIZE + 1];
-	char 	*stage;
+	char		*file[1024];
+	char		buffer[BUFF_SIZE + 1];
+	char		*stage;
 
 }				t_files;
 
-int	get_next_line(const int fd, char **line);
+int				get_next_line(const int fd, char **line);
 
 #endif
