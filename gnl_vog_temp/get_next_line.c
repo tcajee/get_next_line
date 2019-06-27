@@ -12,7 +12,6 @@
 
 #include "get_next_line.h"
 
-
 static int	copy_new_line(t_files *files, int fd)
 {
 	if (!(files->stage = ft_strdup(files->file[fd])))
@@ -33,6 +32,8 @@ static int	find_new_line(t_files *files, int fd)
 {
 	int		bytes;
 
+	if (!files->file[fd])
+		files->file[fd] = ft_strnew(0);
 	while (ft_strchr(files->file[fd], '\n') == NULL)
 	{
 		if (!(files->buffer = (char *)malloc(sizeof(char) * BUFF_SIZE + 1)))
@@ -59,8 +60,6 @@ int			get_next_line(const int fd, char **line)
 
 	if (fd < 0 || !line || BUFF_SIZE < 1)
 		return (-1);
-	if (!files.file[fd])
-		files.file[fd] = ft_strnew(0);
 	if (find_new_line(&files, fd) < 0)
 		return (-1);
 	if (ft_strchr(files.file[fd], '\n') != NULL)
@@ -78,9 +77,6 @@ int			get_next_line(const int fd, char **line)
 		ft_strdel(&files.file[fd]);
 	}
 	else
-	{
-		ft_strdel(&files.file[fd]);
 		return (0);
-	}
 	return (1);
 }
