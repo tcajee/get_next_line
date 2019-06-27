@@ -1,67 +1,85 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_get_next_line.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: student@42 <@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2013/12/01 22:10:06 by student@42        #+#    #+#             */
-/*   Updated: 2013/12/03 13:35:51 by qperez           ###   ########.fr       */
+/*   Created: 2019/06/18 17:29:40 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/27 10:49:11 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "get_next_line.h"
 #include <stdio.h>
-#include <stdlib.h>
+#include <sys/stat.h>
 #include <fcntl.h>
-#include <string.h>
-#include <sys/wait.h>
 
-int	get_next_line(int fd, char **line);
-
-int	main(int argc, char ** argv)
+static int	find_new_line(t_files *files, int fd, char **file)
 {
-	int		fd;
-	int		fd2;
-	char	*line;
-	pid_t	child;
-	char	n = '\n';
+	int		bytes;
 
-	if (argc < 2)
+	if (!file[fd])
+		file[fd] = ft_strnew(0);
+	while (ft_strchr(file[fd], '\n') == NULL)
 	{
-		printf("Usage %s <filename>\n", argv[0]);
-		return (1);
+		if ((bytes = read(fd, files->buffer, BUFF_SIZE)) == 0)
+			break ;
+		if (bytes < 0)
+			return (-1);
+		files->stage = ft_strjoin(file[fd],\
+				ft_memset(files->buffer + bytes, '\0', 1) - bytes);
+		ft_strdel(&file[fd]);
+		file[fd] = ft_strdup(files->stage);
+		ft_strdel(&files->stage);
 	}
-	fd = open(argv[1], O_RDONLY);
-	fd2 = open("me.txt", O_WRONLY | O_CREAT | O_TRUNC, 0666);
-	if (fd == -1 || fd2 == -1)
-	{
-		perror("open");
-		close(fd);
-		close(fd2);
+	return (1);
+}
+
+int			get_next_line(const int fd, char **line)
+{
+	static t_files files;
+
+	if (fd < 0 || !line || find_new_line(&files, fd, files.file) < 0)
 		return (-1);
-	}
-	while (get_next_line(fd, &line) == 1)
+	if (ft_strchr(files.file[fd], '\n') != NULL)
 	{
-		write(fd2, line, strlen(line));
-		write(fd2, &n, 1);					// attention si le fichier test n a pas de \n et que ca affiche une erreur c'est normal
-		free(line);							// vous inquietez pas
+		files.stage = ft_strdup(files.file[fd]);
+		*line = ft_strdup(ft_memset(ft_strchr(\
+						files.stage, '\n'), '\0', 1) - ft_strlen(files.stage));
+		ft_strdel(&files.file[fd]);
+		files.file[fd] = ft_strdup(ft_strchr(files.stage, '\0') + 1);
+		ft_strdel(&files.stage);
 	}
-	close(fd);
-	close(fd2);
-	child = fork();
-	if (child == 0)
-	{
-		char	*arg[] = {"/usr/bin/diff", NULL, "me.txt", NULL};
-
-		arg[1] = argv[1];
-		execve(arg[0], arg, NULL);
-		exit(0);
-	}
+	else if ((*line = ft_strdup(files.file[fd])) && files.file[fd][0])
+		ft_strdel(&files.file[fd]);
 	else
-		wait(NULL); // bad code I know ... but it's not the project
-	(void)argc;
-	(void)argv;
+	{
+		ft_strdel(&files.file[fd]);
+		return (0);
+	}
+	return (1);
+}
+//---<int main(void)>--------------------------------------------------------{{{
+
+int main(void)
+{
+	char	*line = NULL;
+	int x = 1;
+	int fd = open("./test.txt", O_RDONLY);
+
+	if (!fd)
+		return (-99);
+	while (x > 0)
+	{
+		x = get_next_line(-42, &line);
+		printf("x: %d\n", x);
+		printf("line: %s\n", line);
+	}
+	ft_strdel(&line);
+	close(fd);
 	return (0);
 }
+
+//}}}
 
