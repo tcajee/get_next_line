@@ -12,33 +12,12 @@
 
 #include "get_next_line.h"
 
-static int	find_new_line(t_files *files, int fd)
-{
-	int		bytes;
-
-	while (ft_strchr(files->file[fd], '\n') == NULL)
-	{
-		if (!(files->buffer = (char *)malloc(sizeof(char) * BUFF_SIZE + 1)))
-			return (-1);
-		if ((bytes = read(fd, files->buffer, BUFF_SIZE)) == 0)
-			break ;
-		if (bytes < 0)
-			return (-1);
-		if (!(files->stage = ft_strjoin(files->file[fd],\
-						ft_memset((files->buffer + bytes), '\0', 1) - bytes)))
-			return (-1);
-		ft_strdel(&files->file[fd]);
-		if (!(files->file[fd] = ft_strdup(files->stage)))
-			return (-1);
-		ft_strdel(&files->stage);
-	}
-	return (1);
-}
 
 static int	copy_new_line(t_files *files, int fd)
 {
 	if (!(files->stage = ft_strdup(files->file[fd])))
 		return (-1);
+	ft_strdel(&files->line);
 	if (!(files->line = ft_strdup(\
 					ft_memset(ft_strchr(files->stage, '\n'), '\0', 1)\
 					- ft_strlen(files->stage))))
@@ -50,6 +29,30 @@ static int	copy_new_line(t_files *files, int fd)
 	return (1);
 }
 
+static int	find_new_line(t_files *files, int fd)
+{
+	int		bytes;
+
+	while (ft_strchr(files->file[fd], '\n') == NULL)
+	{
+		if (!(files->buffer = (char *)malloc(sizeof(char) * BUFF_SIZE + 1)))
+			return (-1);
+		if ((bytes = read(fd, files->buffer, BUFF_SIZE)) == 0)
+			return (0);
+		if (bytes < 0)
+			return (-1);
+		if (!(files->stage = ft_strjoin(files->file[fd],\
+						ft_memset((files->buffer + bytes), '\0', 1) - bytes)))
+			return (-1);
+		ft_strdel(&files->file[fd]);
+		if (!(files->file[fd] = ft_strdup(files->stage)))
+			return (-1);
+		ft_strdel(&files->stage);
+		ft_strdel(&files->buffer);
+	}
+	return (1);
+}
+
 int			get_next_line(const int fd, char **line)
 {
 	static t_files files;
@@ -58,11 +61,8 @@ int			get_next_line(const int fd, char **line)
 		return (-1);
 	if (!files.file[fd])
 		files.file[fd] = ft_strnew(0);
-	if (ft_strchr(files.file[fd], '\n') == NULL)
-	{
-		if (find_new_line(&files, fd) < 0)
-			return (-1);
-	}
+	if (find_new_line(&files, fd) < 0)
+		return (-1);
 	if (ft_strchr(files.file[fd], '\n') != NULL)
 	{
 		if (copy_new_line(&files, fd) < 0)
@@ -78,6 +78,9 @@ int			get_next_line(const int fd, char **line)
 		ft_strdel(&files.file[fd]);
 	}
 	else
+	{
+		ft_strdel(&files.file[fd]);
 		return (0);
+	}
 	return (1);
 }

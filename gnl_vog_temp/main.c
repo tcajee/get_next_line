@@ -27,8 +27,9 @@ int main(void)
 	{
 		x = get_next_line(fd, &line);
 		printf("[%d] line: %s\n", x, line);
+	    ft_strdel(&line);
+	    line = NULL;
 	}
-	ft_strdel(&line);
 	close(fd);
 	return (0);
 }
