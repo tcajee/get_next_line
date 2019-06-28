@@ -14,7 +14,6 @@
 # define GET_NEXT_LINE_H
 # define BUFF_SIZE 64
 # define BUFF_SIZE 64
-# define FT_(x, y) if (x) return y;
 # include "./libft/libft.h"
 
 typedef struct	s_files
