@@ -6,7 +6,7 @@
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 15:38:25 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/17 10:38:01 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/06/28 13:45:58 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ char	*ft_itoa(int n)
 	size_t	i;
 
 	i = 0;
-	FT_((n == -2147483648), (ft_strdup("-2147483648")))
-	FT___((n == 0), (ft_strdup("0")))
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	else if (n == 0)
+		return (ft_strdup("0"));
 	else if (n < 0)
 		x = n * -1;
 	else
 		x = n;
 	string = ft_strnew(12);
-	FT_((!string), NULL)
+	FT_(!string, NULL);
 	while (x > 0)
 	{
 		string[i++] = (x % 10) + 48;

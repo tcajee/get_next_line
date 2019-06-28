@@ -15,9 +15,9 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# define FT_(x, y) if (x) return y
-# define FT__(x, y) else (x) return y
-# define FT___(x, y) else if (x) return y
+# define FT_(x, y) if (x) return y;
+# define FT__(x, y) else (x) return y;
+# define FT___(x, y) else if (x) return y;
 
 typedef	struct		s_list
 {

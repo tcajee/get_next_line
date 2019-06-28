@@ -31,7 +31,7 @@ char	*ft_strtrim(char const *s)
 			end--;
 		while (s++ != end)
 			len++;
-		FT_(!(new = ft_strsub(start, 0, len)), NULL)
+		FT_(!(new = ft_strsub(start, 0, len)), NULL);
 	}
 	return (new);
 }

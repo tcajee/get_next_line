@@ -14,6 +14,6 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	FT_(!s, NULL)
+	FT_(!s, NULL);
 	return (ft_memchr(s, c, ft_strlen(s) + 1));
 }

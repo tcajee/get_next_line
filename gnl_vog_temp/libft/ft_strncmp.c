@@ -24,8 +24,8 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		if (n > ft_strlen(s2))
 			n = ft_strlen(s2) + 1;
 		result = ft_memcmp(s1, s2, n);
-		FT_(result > 0, 1)
-		FT_(result < 0, -1)
+		FT_(result > 0, 1);
+		FT_(result < 0, -1);
 	}
 	return (result);
 }

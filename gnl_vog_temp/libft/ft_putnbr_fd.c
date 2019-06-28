@@ -6,7 +6,7 @@
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/23 14:01:37 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/27 16:12:18 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/06/28 13:47:40 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	FT_(fd < 0, )
+	if (fd < 0)
+		return ;
 	if (n < 0)
 	{
-		FT_(n == -2147483648, ft_putstr_fd("-2147483648", fd))
+		if (n == -2147483648)
+			return (ft_putstr_fd("-2147483648", fd));
 		else
 			ft_putchar_fd('-', fd);
 		n *= -1;
