@@ -23,11 +23,12 @@ int main(void)
 
 	if (!fd)
 		return (-99);
+	printf("-----------------------------------------------------------\n");
 	while (x > 0)
 	{
 		x = get_next_line(fd, &line);
 		printf("[%d] line: %s\n", x, line);
-	    ft_strdel(&line);
+	    ft_strdel(&line);printf("-----------------------------------------------------------\n");
 	    line = NULL;
 	}
 	close(fd);
