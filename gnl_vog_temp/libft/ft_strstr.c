@@ -17,13 +17,11 @@ char	*ft_strstr(const char *haystack, const char *needle)
 	int i;
 
 	i = 0;
-	if (needle[0] == '\0')
-		return ((char *)haystack);
+	FT_(needle[0] == '\0', ((char *)haystack))
 	while (haystack[i])
 	{
-		if (haystack[i] == needle[0] \
-				&& (ft_strncmp(&haystack[i], needle, ft_strlen(needle))) == 0)
-			return ((char *)&haystack[i]);
+		FT_(haystack[i] == needle[0] && (ft_strncmp(&haystack[i], needle, \
+						ft_strlen(needle))) == 0, ((char *)&haystack[i]))
 		i++;
 	}
 	return (NULL);

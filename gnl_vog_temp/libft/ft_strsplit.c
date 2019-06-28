@@ -24,16 +24,13 @@ char	**ft_strsplit(char const *s, char c)
 	if (s)
 	{
 		words = ft_strwcount(s, c);
-		array = (char **)malloc(words * sizeof(char *) + 1);
-		if (!array)
-			return (NULL);
+		FT_(!(array = (char **)malloc(words * sizeof(char *) + 1)), NULL)
 		insert = array;
 		while (words-- > 0)
 		{
 			start = ft_strwnext(s, c);
 			len = ft_strwlen(start, c);
-			if (!(*insert++ = ft_strsub(start, 0, len)))
-				return (NULL);
+			FT_(!(*insert++ = ft_strsub(start, 0, len)), NULL)
 			s = (start + len);
 		}
 		*insert = NULL;

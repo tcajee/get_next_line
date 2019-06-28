@@ -14,7 +14,6 @@
 
 char	*ft_strcpy(char *dst, const char *src)
 {
-	if (!src && !dst)
-		return (NULL);
+	FT_(!src && !dst, NULL)
 	return (ft_memcpy(dst, src, ft_strlen(src) + 1));
 }

@@ -14,12 +14,10 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (fd < 0)
-		return ;
+	FT_(fd < 0, )
 	if (n < 0)
 	{
-		if (n == -2147483648)
-			return (ft_putstr_fd("-2147483648", fd));
+		FT_(n == -2147483648, ft_putstr_fd("-2147483648", fd))
 		else
 			ft_putchar_fd('-', fd);
 		n *= -1;

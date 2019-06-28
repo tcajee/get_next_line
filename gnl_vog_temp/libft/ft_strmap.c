@@ -20,8 +20,7 @@ char	*ft_strmap(char const *s, char (*f)(char))
 	new = NULL;
 	if (s && f)
 	{
-		if (!(new = ft_strnew(ft_strlen(s))))
-			return (NULL);
+		FT_(!(new = ft_strnew(ft_strlen(s))), NULL)
 		cursor = new;
 		while (*s)
 			*cursor++ = f(*s++);

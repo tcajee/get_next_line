@@ -19,17 +19,14 @@ char	*ft_itoa(int n)
 	size_t	i;
 
 	i = 0;
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
-	else if (n == 0)
-		return (ft_strdup("0"));
+	FT_((n == -2147483648), (ft_strdup("-2147483648")))
+	FT___((n == 0), (ft_strdup("0")))
 	else if (n < 0)
 		x = n * -1;
 	else
 		x = n;
 	string = ft_strnew(12);
-	if (!string)
-		return (NULL);
+	FT_((!string), NULL)
 	while (x > 0)
 	{
 		string[i++] = (x % 10) + 48;

@@ -19,13 +19,11 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 
 	minsize = ft_strlen(needle);
 	cursor = haystack;
-	if (minsize == 0)
-		return ((char *)haystack);
+	FT_(minsize == 0, ((char *)haystack))
 	while (*cursor && (cursor + minsize) <= (haystack + len))
 	{
-		if (*cursor == *needle && \
-				ft_strncmp(cursor, needle, minsize) == 0)
-			return ((char *)cursor);
+		FT_(*cursor == *needle && \
+				ft_strncmp(cursor, needle, minsize) == 0, (char *)cursor)
 		cursor++;
 	}
 	return (NULL);

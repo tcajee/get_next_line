@@ -15,9 +15,7 @@
 char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
 	if (src)
-	{
-		if (ft_strlen(src) < len)
-			return (ft_memcpy(ft_memset(dst, '\0', len), src, ft_strlen(src)));
-	}
+		FT_(ft_strlen(src) < len, ft_memcpy(\
+					ft_memset(dst, '\0', len), src, ft_strlen(src)));
 	return (ft_memcpy(dst, src, len));
 }

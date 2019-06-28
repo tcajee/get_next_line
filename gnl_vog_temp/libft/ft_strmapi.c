@@ -22,8 +22,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	if (s && f)
 	{
 		i = 0;
-		if (!(new = ft_strnew(ft_strlen(s))))
-			return (NULL);
+		FT_(!(new = ft_strnew(ft_strlen(s))), NULL)
 		cursor = new;
 		while (*s)
 			*cursor++ = f(i++, *s++);
