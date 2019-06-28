@@ -36,7 +36,11 @@ static int	find_new_line(t_files *files, int fd)
 		FT_(!(files->buffer = \
 					(char *)malloc(sizeof(char) * BUFF_SIZE + 1)), -1);
 		FT_((bytes = read(fd, files->buffer, BUFF_SIZE)) == 0, 0);
-		FT_(bytes < 0, -1);
+		if (bytes < 0)
+		{
+			ft_strdel(&files->buffer);
+			return (-1);
+		}
 		FT_(!(files->stage = ft_strjoin(files->file[fd],ft_memset(\
 							(files->buffer + bytes), '\0', 1) - bytes)), -1);
 		ft_strdel(&files->file[fd]);
@@ -51,7 +55,7 @@ int			get_next_line(const int fd, char **line)
 {
 	static t_files files;
 
-	FT_((fd < 0 || !line || BUFF_SIZE < 1), -1);
+	FT_((fd < 0 || !line || BUFF_SIZE < 1 || (read(fd, NULL, 0)) == -1), -1);
 	FT_(find_new_line(&files, fd) < 0, -1);
 	if (ft_strchr(files.file[fd], '\n') != NULL)
 	{
