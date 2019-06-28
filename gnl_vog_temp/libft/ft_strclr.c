@@ -6,7 +6,7 @@
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/29 14:15:01 by tcajee            #+#    #+#             */
-/*   Updated: 2019/05/30 10:00:07 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/06/28 11:02:38 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_strclr(char *as)
 {
-	if (as)
+	if (as && *as)
 	{
 		while (*as)
 			*as++ = '\0';
