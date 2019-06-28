@@ -20,18 +20,14 @@ int main(void)
 	char	*line = NULL;
 	int		x = 1;
 	int		fd = open("./test.txt", O_RDONLY);
+	/* int		fd = open("./empty.txt", O_RDONLY); */
 
-	if (!fd)
-		return (-99);
-
-printf("------------------------------------------------------\n");
 	while (x > 0)
 	{
-		x = get_next_line(fd, &line);
+		x = get_next_line(1600, &line);
 		printf("[%d] line: %s\n", x, line);
 		ft_strdel(&line);
 		line = NULL;
-printf("------------------------------------------------------\n");
 	}
 	close(fd);
 	return (0);

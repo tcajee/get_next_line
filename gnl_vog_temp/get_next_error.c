@@ -55,7 +55,8 @@ int			get_next_line(const int fd, char **line)
 {
 	static t_files files;
 
-	FT_((fd < 0 || !line || read(fd, NULL, 0) == -1), -1);
+	/* FT_((fd < 0 || !line || BUFF_SIZE < 1), -1); */
+	FT_((fd < 0 || !line), -1);
 	FT_(find_new_line(&files, fd) < 0, -1);
 	if (ft_strchr(files.file[fd], '\n') != NULL)
 	{
