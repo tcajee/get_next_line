@@ -15,7 +15,6 @@
 static int	copy_new_line(t_files *files, int fd)
 {
 	FT_(!(files->stage = ft_strdup(files->file[fd])), -1);
-//	ft_strdel(&files->line);
 	ft_memset(ft_strchr(files->stage, '\n'), '\0', 1);
 	FT_(!(files->line = ft_strdup(files->stage)), -1);
 	ft_strdel(&files->file[fd]);

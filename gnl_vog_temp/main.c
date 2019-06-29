@@ -22,12 +22,14 @@ int main(void)
 	int		fd = open("./test.txt", O_RDONLY);
 	/* int		fd = open("./empty.txt", O_RDONLY); */
 
+	printf("------------------------------------------------------\n");
 	while (x > 0)
 	{
-		x = get_next_line(1600, &line);
+		x = get_next_line(fd, &line);
 		printf("[%d] line: %s\n", x, line);
 		ft_strdel(&line);
 		line = NULL;
+	printf("-----------------------------------------------------\n");
 	}
 	close(fd);
 	return (0);
