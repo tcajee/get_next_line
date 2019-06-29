@@ -33,15 +33,11 @@ static int	find_new_line(t_files *files, int fd)
 	{
 		FT_(!(files->buffer = ft_strnew(BUFF_SIZE)), -1);
 		FT_((bytes = read(fd, files->buffer, BUFF_SIZE)) == 0, 0);
-		if (bytes < 0)
-		{
-			ft_strdel(&files->buffer);
-			return (-1);
-		}
+		FT_(bytes < 0, -1);
 		FT_(!(files->stage = ft_strjoin(files->file[fd], files->buffer)), -1);
 		ft_strdel(&files->file[fd]);
-		ft_strdel(&files->buffer);
 		FT_(!(files->file[fd] = ft_strdup(files->stage)), -1);
+		ft_strdel(&files->buffer);
 		ft_strdel(&files->stage);
 	}
 	return (1);
