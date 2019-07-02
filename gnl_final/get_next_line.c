@@ -6,7 +6,7 @@
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 10:15:46 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/02 15:03:01 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/07/02 15:31:05 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	copy_next_line(t_files *files, int fd)
 	index = ft_strchr(trace, '\n') - trace;
 	FT_(!(files->line = ft_strsub(trace, 0, index)), -1);
 	FT_(!(files->file[fd] =
-		ft_strsub(trace, index + 1, ft_strlen(trace) - index), -1), -1);
+		ft_strsub(trace, index + 1, ft_strlen(trace) - index)), -1);
 	ft_strdel(&trace);
 	return (1);
 }

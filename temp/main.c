@@ -6,7 +6,7 @@
 /*   By: tcajee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 17:29:40 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/02 15:29:50 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/06/27 10:49:11 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,13 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-int	main(void)
+int main(void)
 {
-	char	*line;
-	int		x;
-	int		fd;
+	char	*line = NULL;
+	int		x = 1;
+	int		fd = open("./test.txt", O_RDONLY);
+	/* int		fd = open("./empty.txt", O_RDONLY); */
 
-	fd = open("./text.txt", O_RDONLY);
-	x = 1;
-	line = NULL;
 	printf("------------------------------------------------------\n");
 	while (x > 0)
 	{
@@ -31,7 +29,7 @@ int	main(void)
 		printf("[%d] line: %s\n", x, line);
 		ft_strdel(&line);
 		line = NULL;
-		printf("-----------------------------------------------------\n");
+	printf("-----------------------------------------------------\n");
 	}
 	close(fd);
 	return (0);
