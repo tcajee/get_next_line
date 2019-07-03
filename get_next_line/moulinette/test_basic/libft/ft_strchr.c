@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/17 10:17:44 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/02 15:15:24 by tcajee           ###   ########.fr       */
+/*   Created: 2016/02/15 01:07:54 by lnagy             #+#    #+#             */
+/*   Updated: 2016/02/15 01:13:09 by lnagy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
-# include "./libft/libft.h"
+#include "libft.h"
 
-typedef struct	s_files
+char	*ft_strchr(const char *s, int c)
 {
-	char		*file[1024];
-	char		*line;
-}				t_files;
+	int	i;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	i = 0;
+	while (s && s[i])
+	{
+		if (s[i] == c)
+			return ((char *)(&s[i]));
+		i++;
+	}
+	if (c == 0)
+		return ((char *)(&s[i]));
+	return (NULL);
+}

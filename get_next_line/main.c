@@ -20,19 +20,26 @@ int	main(void)
 	char	*line;
 	int		x;
 	int		fd;
+	int		total;
 
-	fd = open("./text.txt", O_RDONLY);
-	x = 1;
 	line = NULL;
-	printf("------------------------------------------------------\n");
+	x = 1;
+	fd = open("./bible.txt", O_RDONLY);
+	total = 0;
+printf("--------------------------------------------\n");
 	while (x > 0)
 	{
 		x = get_next_line(fd, &line);
 		printf("[%d] line: %s\n", x, line);
 		ft_strdel(&line);
 		line = NULL;
-		printf("-----------------------------------------------------\n");
+		total++;
+printf("--------------------------------------------\n");
 	}
+printf("BUFF_SIZE is set to [%d]\n", BUFF_SIZE);
+printf("Total chars in file [4351186]\n");
+printf("Total lines printed [%d]\n", total);
+	
 	close(fd);
 	return (0);
 }

@@ -34,7 +34,7 @@ static int	find_next_line(t_files *files, int fd)
 
 	if (!files->file[fd])
 		files->file[fd] = ft_strnew(0);
-	while (!(ft_strchr(files->file[fd], '\n')))
+	while (ft_strchr(files->file[fd], '\n') == NULL)
 	{
 		FT_((bytes = read(fd, buffer, BUFF_SIZE)) == 0, 0);
 		FT_(bytes < 0, -1);
@@ -52,7 +52,7 @@ int			get_next_line(const int fd, char **line)
 
 	FT_((fd < 0 || !line || read(fd, NULL, 0) == -1), -1);
 	FT_(find_next_line(&files, fd) < 0, -1);
-	if (ft_strchr(files.file[fd], '\n'))
+	if (ft_strchr(files.file[fd], '\n') != NULL)
 	{
 		FT_(copy_next_line(&files, fd) < 0, -1);
 		FT_(!(*line = ft_strdup(files.line)), -1);

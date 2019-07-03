@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   tests.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: ly <ly@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/17 10:17:44 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/02 15:15:24 by tcajee           ###   ########.fr       */
+/*   Created: 2015/11/23 18:23:01 by lle-blev          #+#    #+#             */
+/*   Updated: 2016/03/23 16:15:51 by ly               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
-# include "./libft/libft.h"
+#ifndef TESTS_H
+# define TESTS_H
 
-typedef struct	s_files
-{
-	char		*file[1024];
-	char		*line;
-}				t_files;
-
-int				get_next_line(const int fd, char **line);
+int			test_simple( void );
+int			test_fds( void );
 
 #endif

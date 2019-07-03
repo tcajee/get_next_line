@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: ly <ly@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/17 10:17:44 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/02 15:15:24 by tcajee           ###   ########.fr       */
+/*   Created: 2015/11/23 18:24:57 by lle-blev          #+#    #+#             */
+/*   Updated: 2016/03/23 16:15:53 by ly               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
-# include "./libft/libft.h"
+#include <stdio.h>
+#include "tests.h"
 
-typedef struct	s_files
-{
-	char		*file[1024];
-	char		*line;
-}				t_files;
+int		main( void ) {
 
-int				get_next_line(const int fd, char **line);
+	unsigned int	count = 0;
 
-#endif
+	count += test_simple();
+	count += test_fds();
+	return 0;
+}

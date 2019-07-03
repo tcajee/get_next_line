@@ -1,26 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/17 10:17:44 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/02 15:15:24 by tcajee           ###   ########.fr       */
+/*   Created: 2016/01/22 21:01:34 by lnagy             #+#    #+#             */
+/*   Updated: 2016/01/22 21:29:06 by lnagy            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
-# include "./libft/libft.h"
+#include "libft.h"
 
-typedef struct	s_files
+void	ft_putchar_fd(char c, int fd)
 {
-	char		*file[1024];
-	char		*line;
-}				t_files;
-
-int				get_next_line(const int fd, char **line);
-
-#endif
+	write(fd, &c, 1);
+}
