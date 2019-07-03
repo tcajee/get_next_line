@@ -6,7 +6,7 @@
 /*   By: ly <ly@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 19:23:15 by ly                #+#    #+#             */
-/*   Updated: 2016/03/23 16:36:26 by ly               ###   ########.fr       */
+/*   Updated: 2019/07/03 16:21:27 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		test_fds( void )
 		perror("error: ");
 		return 0;
 	}
-	fdin = dup2(fdin, 1024);
+	fdin = dup2(fdin, 1023);
 	while (get_next_line(fdin, &line) == 1)
 	{
 		write(fdout, line, strlen(line));
@@ -50,9 +50,11 @@ int		test_fds( void )
 	}
 	fdin = getc(fpin);
 	fdout = getc(fpout);
+	printf("{%c} = {%c}\n", fdin, fdout);
 	while ((fdin != EOF) && (fdout != EOF) && (fdin == fdout)) {
 		fdin = getc(fpin);
 		fdout = getc(fpout);
+	/* printf("{%c} = {%c}\n", fdin, fdout); */
 	}
 
 	if (fdin != fdout)
