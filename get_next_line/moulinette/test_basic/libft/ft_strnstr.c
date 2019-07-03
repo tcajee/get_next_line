@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/30 17:39:22 by lnagy             #+#    #+#             */
-/*   Updated: 2016/04/05 21:27:57 by lnagy            ###   ########.fr       */
+/*   Created: 2019/05/28 13:58:02 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/13 14:44:27 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *s1, const char *s2, size_t n)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t		i;
+	size_t		minsize;
+	const char	*cursor;
 
-	i = 0;
-	while (s1[i] && n)
+	minsize = ft_strlen(needle);
+	cursor = haystack;
+	FT_(minsize == 0, ((char *)haystack));
+	while (*cursor && (cursor + minsize) <= (haystack + len))
 	{
-		if (n < ft_strlen(s2))
-			return (NULL);
-		if (!ft_strncmp(&s1[i], s2, ft_strlen((char*)s2)))
-			return ((char*)&s1[i]);
-		i++;
-		n--;
+		FT_(*cursor == *needle && \
+				ft_strncmp(cursor, needle, minsize) == 0, (char *)cursor);
+		cursor++;
 	}
 	return (NULL);
 }

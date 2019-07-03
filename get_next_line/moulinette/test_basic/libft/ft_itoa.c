@@ -3,48 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 20:57:22 by lnagy             #+#    #+#             */
-/*   Updated: 2016/01/23 17:46:18 by lnagy            ###   ########.fr       */
+/*   Created: 2019/06/06 15:38:25 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/28 13:45:58 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_getsize(long n, size_t sign)
+char	*ft_itoa(int n)
 {
-	size_t	size;
-
-	size = sign + ((n == 0) ? 1 : 0);
-	n = (n < 0) ? n * -1 : n;
-	while (n)
-	{
-		size++;
-		n /= 10;
-	}
-	return (size);
-}
-
-char			*ft_itoa(int n)
-{
-	char	*result;
-	long	nbr;
+	char	*string;
+	int		x;
 	size_t	i;
-	size_t	sign;
 
-	nbr = (long)n;
-	sign = (n < 0) ? 1 : 0;
-	nbr = (sign == 1) ? -1 * nbr : nbr;
-	i = ft_getsize(nbr, sign);
-	if ((result = malloc(i + 1)) == NULL)
-		return (NULL);
-	result[i] = '\0';
-	while (i-- != sign)
+	i = 0;
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	else if (n == 0)
+		return (ft_strdup("0"));
+	else if (n < 0)
+		x = n * -1;
+	else
+		x = n;
+	string = ft_strnew(12);
+	FT_(!string, NULL);
+	while (x > 0)
 	{
-		result[i] = nbr % 10 + '0';
-		nbr = nbr / 10;
+		string[i++] = (x % 10) + 48;
+		x /= 10;
 	}
-	result[0] = (sign == 1) ? '-' : result[0];
-	return (result);
+	if (n < 0)
+		string[i] = '-';
+	string = ft_strcpy(ft_strnew(ft_strlen(string)), ft_strrev(string));
+	return (string);
 }

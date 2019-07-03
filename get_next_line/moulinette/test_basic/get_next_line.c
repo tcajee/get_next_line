@@ -3,91 +3,67 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/05 20:46:28 by lnagy             #+#    #+#             */
-/*   Updated: 2016/04/20 23:01:02 by lnagy            ###   ########.fr       */
+/*   Created: 2019/06/17 10:15:46 by tcajee            #+#    #+#             */
+/*   Updated: 2019/07/02 15:31:05 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static void		freetmp(int fd, char **line, char **box, char *buf)
+static int	copy_next_line(t_files *files, int fd)
 {
-	char	*tmp;
-	int		i;
+	char	*trace;
+	int		index;
 
-	i = 0;
-	while (buf[i] != '\n')
-		i++;
-	tmp = ft_strndup(buf, i);
-	*line = ft_strjoin(box[fd], tmp);
-	if (box[fd])
-		free(box[fd]);
-	free(tmp);
+	trace = files->file[fd];
+	index = ft_strchr(trace, '\n') - trace;
+	FT_(!(files->line = ft_strsub(trace, 0, index)), -1);
+	FT_(!(files->file[fd] =
+		ft_strsub(trace, index + 1, ft_strlen(trace) - index)), -1);
+	ft_strdel(&trace);
+	return (1);
 }
 
-static int		gnl2(int const fd, int *rd, char **line, char **box)
+static int	find_next_line(t_files *files, int fd)
 {
-	int		i;
-	char	buf[BUFF_SIZE + 1];
-	char	*tmp;
+	char	buffer[BUFF_SIZE + 1];
+	char	*stage;
+	long	bytes;
 
-	i = 0;
-	while ((*rd = read(fd, buf, BUFF_SIZE)) > 0)
+	if (!files->file[fd])
+		files->file[fd] = ft_strnew(0);
+	while (ft_strchr(files->file[fd], '\n') == NULL)
 	{
-		buf[*rd] = '\0';
-		if ((ft_strchr(buf, '\n')))
-		{
-			freetmp(fd, line, box, buf);
-			box[fd] = ft_strdup(buf + i + 1);
-			return (1);
-		}
-		else
-		{
-			tmp = ft_strjoin(box[fd], buf);
-			free(box[fd]);
-			box[fd] = tmp;
-		}
+		FT_((bytes = read(fd, buffer, BUFF_SIZE)) == 0, 0);
+		FT_(bytes < 0, -1);
+		buffer[bytes] = '\0';
+		FT_(!(stage = ft_strjoin(files->file[fd], buffer)), -1);
+		ft_strdel(&files->file[fd]);
+		files->file[fd] = stage;
 	}
-	return (0);
+	return (1);
 }
 
-static int		get_norm(const int fd, int *rd, char **line, char **box)
+int			get_next_line(const int fd, char **line)
 {
-	if (*rd == 0 && box[fd] && ft_strcmp(box[fd], "") != 0)
-	{
-		*line = box[fd];
-		box[fd] = NULL;
-		return (1);
-	}
-	return (0);
-}
+	static t_files files;
 
-int				get_next_line(int const fd, char **line)
-{
-	int			rd;
-	char		buf[BUFF_SIZE + 1];
-	static char	*box[255] = {NULL};
-	int			i;
-	char		*tmp;
-
-	i = 0;
-	if (fd <= -1 || !(line) || read(fd, buf, 0) == -1)
-		return (-1);
-	if ((ft_strchr(box[fd], '\n')))
+	FT_((fd < 0 || !line || read(fd, NULL, 0) == -1), -1);
+	FT_(find_next_line(&files, fd) < 0, -1);
+	if (ft_strchr(files.file[fd], '\n') != NULL)
 	{
-		while (box[fd][i] != '\n')
-			i++;
-		*line = ft_strndup(box[fd], i);
-		tmp = ft_strdup(box[fd] + i + 1);
-		free(box[fd]);
-		box[fd] = tmp;
-		return (1);
+		FT_(copy_next_line(&files, fd) < 0, -1);
+		FT_(!(*line = ft_strdup(files.line)), -1);
+		ft_strdel(&files.line);
 	}
-	if (gnl2(fd, &rd, line, box) == 1)
-		return (1);
-	if (get_norm(fd, &rd, line, box) == 1)
-		return (1);
-	return (0);
+	else if (ft_strlen(files.file[fd]) > 0)
+	{
+		FT_(!(*line = ft_strdup(files.file[fd])), -1);
+		ft_strdel(&files.file[fd]);
+	}
+	else
+		return (0);
+	return (1);
 }

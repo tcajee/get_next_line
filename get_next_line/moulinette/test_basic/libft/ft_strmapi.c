@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmap.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 20:00:54 by lnagy             #+#    #+#             */
-/*   Updated: 2016/01/22 23:29:25 by lnagy            ###   ########.fr       */
+/*   Created: 2019/05/30 09:55:21 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/27 16:28:03 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*o;
 	size_t	i;
+	char	*cursor;
+	char	*new;
 
-	i = 0;
-	if ((o = malloc(1 + ft_strlen((char *)s))) == NULL)
-		return (NULL);
-	while (s[i])
+	new = NULL;
+	if (s && f)
 	{
-		o[i] = f(i, s[i]);
-		i++;
+		i = 0;
+		FT_(!(new = ft_strnew(ft_strlen(s))), NULL);
+		cursor = new;
+		while (*s)
+			*cursor++ = f(i++, *s++);
 	}
-	o[i] = '\0';
-	return (o);
+	return (new);
 }

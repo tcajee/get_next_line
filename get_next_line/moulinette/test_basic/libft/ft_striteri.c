@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striter.c                                       :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 19:58:19 by lnagy             #+#    #+#             */
-/*   Updated: 2016/01/22 21:14:36 by lnagy            ###   ########.fr       */
+/*   Created: 2019/05/29 15:16:14 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/27 16:02:49 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	char	*o;
+	size_t i;
+	size_t len;
 
-	o = s;
-	while (*o)
+	if (s && f)
 	{
-		f(o - s, o);
-		o++;
+		i = -1;
+		len = ft_strlen(s);
+		while (++i < len)
+			f(i, &s[i]);
 	}
 }

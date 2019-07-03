@@ -3,35 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 21:07:14 by lnagy             #+#    #+#             */
-/*   Updated: 2016/02/06 00:42:55 by lnagy            ###   ########.fr       */
+/*   Created: 2019/05/23 14:01:37 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/28 13:47:40 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	ft_print(long nbr, int fd)
+void	ft_putnbr_fd(int n, int fd)
 {
-	if (nbr < 10)
-		ft_putchar_fd('0' + nbr, fd);
-	else
+	if (fd < 0)
+		return ;
+	if (n < 0)
 	{
-		ft_print(nbr / 10, fd);
-		ft_putchar_fd('0' + nbr % 10, fd);
+		if (n == -2147483648)
+			return (ft_putstr_fd("-2147483648", fd));
+		else
+			ft_putchar_fd('-', fd);
+		n *= -1;
 	}
-}
-
-void		ft_putnbr_fd(int n, int fd)
-{
-	long	nbr;
-
-	nbr = (long)n;
-	if (nbr < 0)
+	if (n > 9)
 	{
-		write(fd, "-", 1);
-		nbr *= -1;
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
 	}
-	ft_print(nbr, fd);
+	else if (ft_isdigit(n + 48))
+		ft_putchar_fd(n + 48, fd);
 }

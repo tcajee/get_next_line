@@ -3,70 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/23 18:35:16 by lnagy             #+#    #+#             */
-/*   Updated: 2016/01/23 18:41:46 by lnagy            ###   ########.fr       */
+/*   Created: 2019/05/30 12:28:11 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/17 11:22:51 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_nwords(const char *s, char c)
+char	**ft_strsplit(char const *s, char c)
 {
-	size_t	nwords;
-	size_t	inword;
+	char		**array;
+	char		**insert;
+	const char	*start;
+	size_t		len;
+	size_t		words;
 
-	inword = 0;
-	nwords = 0;
-	while (*s != '\0')
+	array = NULL;
+	if (s)
 	{
-		if (inword == 1 && *s == c)
-			inword = 0;
-		if (inword == 0 && *s != c)
+		words = ft_strwcount(s, c);
+		FT_(!(array = (char **)malloc(words * sizeof(char *) + 1)), NULL);
+		insert = array;
+		while (words-- > 0)
 		{
-			inword = 1;
-			nwords++;
+			start = ft_strwnext(s, c);
+			len = ft_strwlen(start, c);
+			FT_(!(*insert++ = ft_strsub(start, 0, len)), NULL);
+			s = (start + len);
 		}
-		s++;
+		*insert = NULL;
 	}
-	return (nwords);
-}
-
-static size_t	ft_getlen(const char *s, char c)
-{
-	size_t	len;
-
-	len = 0;
-	while (*s != c && *s != '\0')
-	{
-		len++;
-		s++;
-	}
-	return (len);
-}
-
-char			**ft_strsplit(char const *s, char c)
-{
-	char	**tab;
-	size_t	nwords;
-	size_t	index;
-
-	index = 0;
-	nwords = ft_nwords((const char *)s, c);
-	if ((tab = (char **)malloc(sizeof(char *) * (nwords + 1))) == NULL)
-		return (NULL);
-	while (nwords--)
-	{
-		while (*s == c && *s != '\0')
-			s++;
-		tab[index] = ft_strsub((const char *)s, 0,
-				ft_getlen((const char *)s, c));
-		if (tab[index] == NULL)
-			return (NULL);
-		s = s + ft_getlen(s, c);
-		index++;
-	}
-	tab[index] = NULL;
-	return (tab);
+	return (array);
 }

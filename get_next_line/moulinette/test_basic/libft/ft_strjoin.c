@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 20:21:20 by lnagy             #+#    #+#             */
-/*   Updated: 2016/02/06 01:15:07 by lnagy            ###   ########.fr       */
+/*   Created: 2019/05/30 11:34:12 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/27 16:27:12 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,16 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*o;
-	size_t	i;
-	size_t	j;
+	char	*new;
 
-	i = 0;
-	j = 0;
-	if ((o = (char *)malloc(sizeof(char) * (ft_strlen(s1)
-		+ ft_strlen(s2) + 1))) == NULL)
-		return (NULL);
-	while (s1 && s1[i])
+	new = NULL;
+	if (s1 && s2)
 	{
-		o[i] = s1[i];
-		i++;
+		FT_(!(new = ft_strnew((ft_strlen(s1) + ft_strlen(s2)))), NULL);
+		if (s1)
+			new = ft_strcpy(new, s1);
+		if (s2)
+			new = ft_strcat(new, s2);
 	}
-	while (s2 && s2[j])
-	{
-		o[i + j] = s2[j];
-		j++;
-	}
-	o[i + j] = '\0';
-	return (o);
+	return (new);
 }

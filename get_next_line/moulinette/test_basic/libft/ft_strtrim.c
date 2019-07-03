@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 20:25:25 by lnagy             #+#    #+#             */
-/*   Updated: 2016/02/15 16:28:51 by lnagy            ###   ########.fr       */
+/*   Created: 2019/05/30 16:03:32 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/17 11:25:41 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,24 @@
 
 char	*ft_strtrim(char const *s)
 {
-	char	*o;
-	char	*p;
-	size_t	i;
-	size_t	len;
+	const char	*start;
+	const char	*end;
+	char		*new;
+	size_t		len;
 
-	i = 0;
-	while (ft_iswhite(s[i]) && s[i])
-		i++;
-	if (s[i] == '\0')
-		return (ft_strdup("\0"));
-	len = ft_strlen((char *)s) - 1;
-	while (ft_iswhite(s[len]))
-		len--;
-	if ((o = malloc(len + 2 - i)) == NULL)
-		return (NULL);
-	len = len + 1 - i;
-	p = o;
-	while (len--)
-		*(o++) = s[i++];
-	*o = '\0';
-	return (p);
+	new = NULL;
+	if (s)
+	{
+		len = 0;
+		end = (s + (ft_strlen(s)));
+		while (ft_iswhitespace(*s) == 1 && *s)
+			s++;
+		start = s;
+		while (ft_iswhitespace(*(end - 1)) == 1 && end != s)
+			end--;
+		while (s++ != end)
+			len++;
+		FT_(!(new = ft_strsub(start, 0, len)), NULL);
+	}
+	return (new);
 }

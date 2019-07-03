@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 19:58:19 by lnagy             #+#    #+#             */
-/*   Updated: 2016/02/15 16:24:03 by lnagy            ###   ########.fr       */
+/*   Created: 2019/05/29 15:02:01 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/27 16:03:00 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 void	ft_striter(char *s, void (*f)(char *))
 {
-	while (*s)
-		f(s++);
+	size_t i;
+	size_t len;
+
+	if (s && f)
+	{
+		i = 0;
+		len = ft_strlen(s);
+		while (i < len)
+			f(&s[i++]);
+	}
 }

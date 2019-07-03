@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/15 01:07:54 by lnagy             #+#    #+#             */
-/*   Updated: 2016/02/15 01:13:09 by lnagy            ###   ########.fr       */
+/*   Created: 2019/05/28 11:57:56 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/27 16:09:15 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,6 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int	i;
-
-	i = 0;
-	while (s && s[i])
-	{
-		if (s[i] == c)
-			return ((char *)(&s[i]));
-		i++;
-	}
-	if (c == 0)
-		return ((char *)(&s[i]));
-	return (NULL);
+	FT_(!s, NULL);
+	return (ft_memchr(s, c, ft_strlen(s) + 1));
 }

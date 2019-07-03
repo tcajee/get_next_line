@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/22 19:50:01 by lnagy             #+#    #+#             */
-/*   Updated: 2016/02/15 15:40:52 by lnagy            ###   ########.fr       */
+/*   Created: 2019/05/29 13:17:54 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/28 11:02:26 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	ft_memdel(void **ap)
 {
-	if (*ap)
+	if (ap && *ap)
+	{
 		free(*ap);
-	*ap = NULL;
+		*ap = NULL;
+	}
 }
