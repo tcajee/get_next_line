@@ -6,7 +6,7 @@
 /*   By: ly <ly@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 19:23:15 by ly                #+#    #+#             */
-/*   Updated: 2016/03/23 16:36:26 by ly               ###   ########.fr       */
+/*   Updated: 2019/07/03 16:21:27 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 #include <sys/stat.h>
 #include "get_next_line.h"
 
-
 int		test_fds( void )
 {
+printf("----------------------------OPEN FILES---------------------------------\n\n");
+
 	int		fdin =	open("test1.in", O_RDONLY);
 	printf("int	fdin	=	[%d]	=	open(test1.in, O_RDONLY);\n", fdin);
 
@@ -34,15 +35,26 @@ int		test_fds( void )
 	char	*line = NULL;
 	printf("char	*line	=	NULL;\n");
 
-printf("------------------------------------------------------------------------\n");
+printf("-------------------------------ERROR CHECK FDIN--------------------------\n\n");
 
 	printf("if\n	((fdin = [%d] = -1) || (fdout = [%d] = -1))\n	return (-1);\n\n", fdin, fdout);
+	if (fdin == -1 || fdout == -1)
+		perror("error: ");
 	FT_((fdin == -1 || fdout == -1), -1);
+
+printf("-----------------------------------DUP2----------------------------------\n\n");
 
 	fdin = dup2(fdin, 1023);
 	printf("fdin = [%d] = dup2(fdin, 1024);\n\n", fdin);
 
-printf("------------------------------------------------------------------------\n");
+printf("-------------------------------ERROR CHECK FDIN-------------------------\n\n");
+
+	printf("if\n	((fdin = [%d] = -1) || (fdout = [%d] = -1))\n	return (-1);\n\n", fdin, fdout);
+	if (fdin == -1 || fdout == -1)
+		perror("error: ");
+	FT_((fdin == -1 || fdout == -1), -1);
+
+printf("---------------------------CALL GNL TO FILL OUTFILE---------------------------\n\n");
 
 	printf("while\n	(r00 = [%d] = get_next_line(%d, %s)\n\n", r00, fdin, line);
 	while ((r00 = get_next_line(fdin, &line)) == 1){
@@ -52,19 +64,19 @@ printf("------------------------------------------------------------------------
 		free(line);
 	}
 
-printf("------------------------------------------------------------------------\n");
+printf("----------------------------CLOSE FILES---------------------------------\n\n");
 
 	close(fdin);
 	printf("fdin = close(fdin)\n");
 	close(fdout);
 	printf("fdout = close(fdout)\n\n");
 
-printf("------------------------------------------------------------------------\n");
+printf("------------------------------CHMOD----------------------------------------\n\n");
 
 	chmod("testfd.out", 0644);
 	printf("chmod(testfd.out, 0644);		<-- ?\n");
 
-printf("------------------------------------------------------------------------\n");
+printf("------------------------------SET FILE *-----------------------------------\n\n");
 
 	FILE	*fpin = fopen("test1.in", "r+");
 	printf("FILE	*fpin	= %p =	fopen(test1.in, r+);\n", fpin);
@@ -74,29 +86,31 @@ printf("------------------------------------------------------------------------
 	if (!fpin || !fpout)
 		perror("error:	");
 
-printf("------------------------------------------------------------------------\n");
+printf("----------------------------ERROR CHECK FPIN/OUT-------------------------\n\n");
 
 printf("if\n	(!fpin == [%d] || !fpout == [%d])\n	return (0)\n\n", fdin, fdout);
 	FT_((!fpin || !fpout), -1)
 
-printf("------------------------------------------------------------------------\n");
+printf("-----------------------------READ CHARS FROM FPS-------------------------\n-\n");
 
 	fdin = getc(fpin);
 	printf("fdin	= {%c} = getc(fpin = %p);\n", fdin, fpin);
 	fdout = getc(fpout);
 	printf("fdout	= {%c} = getc(fpout = %p);\n", fdout, fpout);
 
-printf("------------------------------------------------------------------------\n");
+printf("-----------------------------CHECK CHAR BY CHAR---------------------------\n\n");
 
 	printf("while	((fdin != EOF) && (fdout != EOF) && (fdin == fdout))\n");
+	printf("{%c} = {%c}\n", fdin, fdout);
 	while ((fdin != EOF) && (fdout != EOF) && (fdin == fdout)) {
 		fdin = getc(fpin);
 		/* printf("fdin =	{%c} =	getc(fpin = %p);\n", fdin, fpin); */
 		fdout = getc(fpout);
 		/* printf("fdout =	{%c} =	getc(fpout = %p);\n", fdout, fpout); */
+	/* printf("{%c} = {%c}\n", fdin, fdout); */
 	}
 
-printf("------------------------------------------------------------------------\n");
+printf("------------------------------CHECK FOR MATCH---------------------------\n\n");
 
 	if (fdin != fdout){
 		printf("if\n	((fdin = {%c}) != (fdout = {%c})\n", fdin, fdout);
@@ -104,12 +118,12 @@ printf("------------------------------------------------------------------------
 		printf("	r00 = [%d] = 1\n\n", r00);
 	}
 
+printf("----------------------------FINAL OUTPUT---------------------------------\n\n");
 	printf("r00	=	[%d]\n", r00);
 	if (r00 == 0) {
 		printf("test_fds_%d:	[ok]\n", BUFF_SIZE);
 		return 1;
 	}
-printf("------------------------------------------------------------------------\n");
 	printf("test_fds_%d:	[ko]\n", BUFF_SIZE);
 	return 0;
 }

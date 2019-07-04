@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 16:38:11 by anorman           #+#    #+#             */
-/*   Updated: 2019/06/20 17:04:43 by anorman          ###   ########.fr       */
+/*   Created: 2019/06/17 10:17:44 by tcajee            #+#    #+#             */
+/*   Updated: 2019/07/03 16:21:24 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define GET_NEXT_LINE_H
 # include <unistd.h>
 # include "libft/includes/libft.h"
-
-# define BUFF_SIZE 70
+# define BUFF_SIZE 100
 
 typedef struct	s_bmark
 {
