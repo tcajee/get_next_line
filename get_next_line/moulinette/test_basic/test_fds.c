@@ -44,14 +44,18 @@ printf("-------------------------------ERROR CHECK FDIN-------------------------
 
 printf("-----------------------------------DUP2----------------------------------\n\n");
 
-	fdin = dup2(fdin, 1023);
-	printf("fdin = [%d] = dup2(fdin, 1024);\n\n", fdin);
+	
+	int max = sysconf(_SC_OPEN_MAX);
+	printf("int max = [%d] = sysconf(_SC_OPEN_MAX);\n", max);
+
+	fdin = dup2(fdin, max);
+	printf("fdin = [%d] = dup2(fdin, [%d]);\n\n", fdin, max);
 
 printf("-------------------------------ERROR CHECK FDIN-------------------------\n\n");
 
 	printf("if\n	((fdin = [%d] = -1) || (fdout = [%d] = -1))\n	return (-1);\n\n", fdin, fdout);
 	if (fdin == -1 || fdout == -1)
-		perror("error: ");
+		perror("ERROR");
 	FT_((fdin == -1 || fdout == -1), -1);
 
 printf("---------------------------CALL GNL TO FILL OUTFILE---------------------------\n\n");
@@ -74,7 +78,7 @@ printf("----------------------------CLOSE FILES---------------------------------
 printf("------------------------------CHMOD----------------------------------------\n\n");
 
 	chmod("testfd.out", 0644);
-	printf("chmod(testfd.out, 0644);		<-- ?\n");
+	printf("chmod(testfd.out, 0644); // -rw-r--r--\n");
 
 printf("------------------------------SET FILE *-----------------------------------\n\n");
 
@@ -107,7 +111,6 @@ printf("-----------------------------CHECK CHAR BY CHAR-------------------------
 		/* printf("fdin =	{%c} =	getc(fpin = %p);\n", fdin, fpin); */
 		fdout = getc(fpout);
 		/* printf("fdout =	{%c} =	getc(fpout = %p);\n", fdout, fpout); */
-	/* printf("{%c} = {%c}\n", fdin, fdout); */
 	}
 
 printf("------------------------------CHECK FOR MATCH---------------------------\n\n");
