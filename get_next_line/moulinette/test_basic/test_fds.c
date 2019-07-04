@@ -44,12 +44,15 @@ printf("-------------------------------ERROR CHECK FDIN-------------------------
 
 printf("-----------------------------------DUP2----------------------------------\n\n");
 
-	
 	int max = sysconf(_SC_OPEN_MAX);
 	printf("int max = [%d] = sysconf(_SC_OPEN_MAX);\n", max);
 
-	fdin = dup2(fdin, max);
-	printf("fdin = [%d] = dup2(fdin, [%d]);\n\n", fdin, max);
+	/* fdin = dup2(fdin, max); */
+	/* printf("fdin = [%d] = dup2(fdin, [%d]);\n\n", fdin, max); */
+
+	printf("fcntl(old-filedes, F_DUPFD, new-filedes)\n");
+	fdin =	fcntl(fdin, F_DUPFD, max - 1);
+	printf("fdin = [%d] = fctnl([%d], F_DUPFD, [%d]);\n\n", fdin, fdin, max - 1);
 
 printf("-------------------------------ERROR CHECK FDIN-------------------------\n\n");
 
