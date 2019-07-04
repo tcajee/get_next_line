@@ -17,7 +17,7 @@
 
 typedef struct	s_files
 {
-	char		*file[1024];
+	char		*file[1025];
 	char		*line;
 }				t_files;
 
