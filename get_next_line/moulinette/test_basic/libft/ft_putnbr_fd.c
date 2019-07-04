@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/17 10:17:44 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/02 15:15:24 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/23 14:01:37 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/28 13:47:40 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
-# include "./libft/libft.h"
+#include "libft.h"
 
-typedef struct	s_files
+void	ft_putnbr_fd(int n, int fd)
 {
-	char		*file[1024];
-	char		*line;
-}				t_files;
-
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (fd < 0)
+		return ;
+	if (n < 0)
+	{
+		if (n == -2147483648)
+			return (ft_putstr_fd("-2147483648", fd));
+		else
+			ft_putchar_fd('-', fd);
+		n *= -1;
+	}
+	if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else if (ft_isdigit(n + 48))
+		ft_putchar_fd(n + 48, fd);
+}

@@ -3,152 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 10:15:46 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/03 15:43:54 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/07/02 15:31:05 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int	st_prenewline(t_list **start, t_bmark *place)
+static int	copy_next_line(t_files *files, int fd)
 {
-	char	*temp;
-	int		linelen;
+	char	*trace;
+	int		index;
 
-	temp = ft_strchr(place->red, '\n');
-	linelen = ft_strlen(place->red) - ft_strlen(temp);
-	if (!(*start = ft_lstnew(place->red, linelen + 1)))
-		return (-2);
-	ft_memcpy(&(*start)->content[linelen], "\0", 1);
-	if (!(temp = ft_strsub(temp, 1, ft_strlen(temp) - 1)))
-		return (-2);
-	free(place->red);
-	place->red = temp;
-	if (place->red && (*start)->content)
-		return (place->fd);
-	else
-		return (-1);
+	trace = files->file[fd];
+	index = ft_strchr(trace, '\n') - trace;
+	FT_(!(files->line = ft_strsub(trace, 0, index)), -1);
+	FT_(!(files->file[fd] =
+		ft_strsub(trace, index + 1, ft_strlen(trace) - index)), -1);
+	ft_strdel(&trace);
+	return (1);
 }
 
-static int	st_lstfill(const int fd, t_list **start, t_bmark *place)
+static int	find_next_line(t_files *files, int fd)
 {
-	t_list	*nw;
-	char	*str;
-	int		red;
-	int		len;
+	char	buffer[BUFF_SIZE + 1];
+	char	*stage;
+	long	bytes;
 
-	len = 0;
-	nw = NULL;
-	if (!(str = (char *)malloc((BUFF_SIZE + 1) * sizeof(char))))
-		return (-2);
-	while (!len && (red = (int)read(fd, str, BUFF_SIZE)) > 0)
+	if (!files->file[fd])
+		files->file[fd] = ft_strnew(0);
+	while (ft_strchr(files->file[fd], '\n') == NULL)
 	{
-		str[red] = '\0';
-		if (ft_strchr(str, '\n'))
-			len = ft_strlen((ft_strchr(str, '\n')));
-		if (!(nw = ft_lstnew(str, red - len + 1)))
-			place->fd = -2;
-		ft_lstaddend(start, nw);
-		ft_memcpy(&(nw->content[red - len]), "\0", 1);
-		if (len)
-			place->red = ft_strsub(ft_strchr(str, '\n'), 1, len - 1);
-	}
-	free(str);
-	if (red == -1)
-		return ((place->fd = -2));
-	return (red == 0 && !(*start) ? -1 : fd);
-}
-
-/*
-** returns fd for progress or -1 for finished; -2 for error
-** puts the first line into a t_list and the unused read part
-** into place->content
-*/
-
-t_bmark		*st_regplace(const int fd, t_bmark **bookmark)
-{
-	t_bmark		*place;
-
-	if (!(*bookmark))
-	{
-		if (!(*bookmark = (t_bmark *)malloc(sizeof(t_bmark))))
-			return (NULL);
-		(*bookmark)->fd = fd;
-		(*bookmark)->red = NULL;
-		(*bookmark)->next = NULL;
-		return (*bookmark);
-	}
-	else if (*bookmark)
-	{
-		place = *bookmark;
-		while (place && place->fd != fd)
-			place = place->next;
-		if (place)
-			return (place);
-	}
-	if (!(place = (t_bmark *)malloc(sizeof(t_bmark))))
-		return (NULL);
-	place->fd = fd;
-	place->red = NULL;
-	ft_lstadd((t_list **)bookmark, (t_list *)place);
-	return (*bookmark);
-}
-
-/*
-** returns the place matching the fd or makes one if not found
-** returns NULL for failed to make memory
-*/
-
-int			st_cleanup(t_bmark **bm, t_bmark *pl, t_list **lst)
-{
-	ft_lstdel(lst);
-	if (pl->fd == -1 && (!pl->red || !pl->red[0]))
-	{
-		ft_lstdelmid((t_list **)bm, (t_list *)pl);
-		return (0);
-	}
-	else if (pl->fd == -2)
-	{
-		ft_lstdelmid((t_list **)bm, (t_list *)pl);
-		return (-1);
+		FT_((bytes = read(fd, buffer, BUFF_SIZE)) == 0, 0);
+		FT_(bytes < 0, -1);
+		buffer[bytes] = '\0';
+		FT_(!(stage = ft_strjoin(files->file[fd], buffer)), -1);
+		ft_strdel(&files->file[fd]);
+		files->file[fd] = stage;
 	}
 	return (1);
 }
 
 int			get_next_line(const int fd, char **line)
 {
-	static t_bmark	*bookmark;
-	t_bmark			*place;
-	t_list			*lst;
+	static t_files files;
 
-	if (fd < 0 || !line || read(fd, NULL, 0) == -1)
-		return (-1);
-	if (!(place = st_regplace(fd, &bookmark)))
-		return (-1);
-	lst = NULL;
-	if (place->red && place->red[0] && !ft_strchr(place->red, '\n'))
+	FT_((read(fd, NULL, 0) == -1), -1);
+	FT_((fd < 0 || !line || read(fd, NULL, 0) == -1), -1);
+	FT_(find_next_line(&files, fd) < 0, -1);
+	if (ft_strchr(files.file[fd], '\n') != NULL)
 	{
-		if (!(lst = ft_lstnew(place->red, ft_strlen(place->red) + 1)))
-			place->fd = -2;
-		ft_strdel(&place->red);
+		FT_(copy_next_line(&files, fd) < 0, -1);
+		FT_(!(*line = ft_strdup(files.line)), -1);
+		ft_strdel(&files.line);
 	}
-	if (place->red && ft_strchr(place->red, '\n'))
-		place->fd = st_prenewline(&lst, place);
-	else if (place->fd != -2)
-		place->fd = st_lstfill(fd, &lst, place);
-	if (place->fd != -2)
-		if (!(*line = ft_lstcat(lst)))
-			place->fd = -2;
-	if (place->fd == -1 && (!*line || !(*line)[0]))
-		ft_strdel(line);
-	return (st_cleanup(&bookmark, place, &lst));
+	else if (ft_strlen(files.file[fd]) > 0)
+	{
+		FT_(!(*line = ft_strdup(files.file[fd])), -1);
+		ft_strdel(&files.file[fd]);
+	}
+	else
+		return (0);
+	return (1);
 }
-
-/*
-** bookmark is the list of in progress reads.
-** place->content is unused but read content
-** place->content_size is the fd associated or -1 for finished
-** returns 1 for read; 0 for end file; -1 for error
-*/

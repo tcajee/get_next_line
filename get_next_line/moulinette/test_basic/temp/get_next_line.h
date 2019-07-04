@@ -3,23 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 10:17:44 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/02 15:15:24 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/07/03 17:52:44 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
-# include "./libft/libft.h"
+# include <unistd.h>
+# include "libft/includes/libft.h"
+# define BUFF_SIZE 100
 
-typedef struct	s_files
+typedef struct	s_bmark
 {
-	char		*file[1024];
-	char		*line;
-}				t_files;
+	char			*red;
+	int				fd;
+	struct s_bmark	*next;
+}				t_bmark;
 
 int				get_next_line(const int fd, char **line);
 

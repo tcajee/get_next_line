@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/17 10:17:44 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/02 15:15:24 by tcajee           ###   ########.fr       */
+/*   Created: 2019/06/03 17:09:55 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/13 14:50:40 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
-# include "./libft/libft.h"
+#include "libft.h"
 
-typedef struct	s_files
+char	*ft_strrev(char *s)
 {
-	char		*file[1024];
-	char		*line;
-}				t_files;
+	char temp;
+	char *end;
+	char *start;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (s)
+	{
+		start = s;
+		end = (s + (ft_strlen(s) - 1));
+		while (start < end)
+		{
+			temp = *start;
+			*start++ = *end;
+			*end-- = temp;
+		}
+	}
+	return (s);
+}

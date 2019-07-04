@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/17 10:17:44 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/02 15:15:24 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/28 09:01:34 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/28 13:48:10 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# define BUFF_SIZE 1
-# include "./libft/libft.h"
+#include "libft.h"
 
-typedef struct	s_files
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	char		*file[1024];
-	char		*line;
-}				t_files;
+	size_t	offset;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	FT_(!s2, NULL);
+	if (s1)
+	{
+		offset = ft_strlen(s1);
+		if (ft_strlen(s2) < n)
+			return (ft_memcpy(s1 + offset, s2, ft_strlen(s2) + 1) - offset);
+		else
+		{
+			s1 = ft_memcpy(s1 + offset, s2, n) - offset;
+			s1[offset + n] = '\0';
+		}
+	}
+	return (s1);
+}
