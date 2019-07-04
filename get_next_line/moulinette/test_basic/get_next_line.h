@@ -13,10 +13,10 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # define BUFF_SIZE 1
-# if defined(_WIN32)
-# define FOPEN_MAX // Windows
+# elif defined(_WIN32)
+#	define FOPEN_MAX // Windows
 # elif defined(_WIN64)
-# define FOPEN_MAX // Windows
+#	define FOPEN_MAX // Windows
 # elif defined(__CYGWIN__) && !defined(_WIN32)
 # define FOPEN_MAX // Windows (Cygwin POSIX under Microsoft Window)
 # elif defined(__ANDROID__)
@@ -37,7 +37,6 @@
 # define FOPEN_MAX // Oracle Solaris, Open Indiana
 # else
 # define FOPEN_MAX INT_MAX
-
 # include "./libft/libft.h"
 
 typedef struct	s_files
