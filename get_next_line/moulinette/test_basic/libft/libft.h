@@ -16,6 +16,7 @@
 # include <string.h>
 # include <unistd.h>
 # define FT_(x, y) if (x) return y;
+# define INT_MAX 2147483647
 
 typedef	struct		s_list
 {
