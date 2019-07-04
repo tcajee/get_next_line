@@ -50,9 +50,10 @@ printf("-----------------------------------DUP2---------------------------------
 	/* fdin = dup2(fdin, max); */
 	/* printf("fdin = [%d] = dup2(fdin, [%d]);\n\n", fdin, max); */
 
-	printf("fcntl(old-filedes, F_DUPFD, new-filedes)\n");
-	fdin =	fcntl(fdin, F_DUPFD, max - 1);
-	printf("fdin = [%d] = fctnl([%d], F_DUPFD, [%d]);\n\n", fdin, fdin, max - 1);
+	/* printf("fcntl(old-filedes, F_DUPFD, new-filedes)\n"); */
+	printf("fdin = [%d] = open(test1.in, O_RDONLY);\n", fdin);
+	fdin =	fcntl(fdin, F_DUPFD, max);
+	printf("fdin2 = [%d] = fctnl([%d], F_DUPFD, [%d]);\n\n", fdin, fdin, max);
 
 printf("-------------------------------ERROR CHECK FDIN-------------------------\n\n");
 
