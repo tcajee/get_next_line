@@ -39,7 +39,7 @@ printf("	----------		OPEN FILES		----------\n");
 
 printf("	----------		ERROR CHECK FDIN	----------\n");
 
-	/* printf("if\n	((fdin = [%d] = -1) || (fdout = [%d] = -1))\n	return (-1);\n", fdin, fdout); */
+	printf("if\n	((fdin = [%d] = -1) || (fdout = [%d] = -1))\n	return (-1);\n", fdin, fdout);
 	if (fdin == -1 || fdout == -1)
 	{
 		perror("error: ");
@@ -54,7 +54,7 @@ printf("	----------		DUP2			----------\n");
 
 	/* printf("OPEN_MAX = [%d]\n", OPEN_MAX); */
 	fdin = dup2(fdin, 1024);
-	/* printf("fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1023); */
+	printf("fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1023);
 
 	/* fdin = dup2(fdin, _SC_OPEN_MAX); */
 	/* printf("fdin = [%d] = dup2(fdin, [%d]);\n", fdin, _SC_OPEN_MAX); */
@@ -69,7 +69,7 @@ printf("	----------		ERROR CHECK FDIN	----------\n");
 	/* printf("if\n	((fdin = [%d] = -1) || (fdout = [%d] = -1))\n	return (-1);\n", fdin, fdout); */
 	if (fdin == -1 || fdout == -1)
 	{
-		perror("ERROR");
+		perror("	ERROR");
 	/* printf("---------------------------------------------------------------------\n"); */
 	}
 	FT_((fdin == -1 || fdout == -1), -1);
@@ -104,7 +104,7 @@ printf("	----------		SET FILE *		----------\n");
 	/* printf("FILE	*fpout	= %p =	fopen(testfd.out, r+)\n", fpout); */
 
 	if (!fpin || !fpout)
-		perror("error:	");
+		perror("	ERROR");
 
 printf("	----------		ERROR CHECK FPIN/OUT	----------\n");
 

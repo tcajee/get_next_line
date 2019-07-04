@@ -42,7 +42,7 @@ printf("	----------		ERROR CHECK FDIN	----------\n");
 	/* printf("if\n	((fdin = [%d] = -1) || (fdout = [%d] = -1))\n	return (-1);\n", fdin, fdout); */
 	if (fdin == -1 || fdout == -1)
 	{
-		perror("error: ");
+		perror("	ERROR");
 	/* printf("---------------------------------------------------------------------\n"); */
 	}
 	FT_((fdin == -1 || fdout == -1), -1);
@@ -69,7 +69,7 @@ printf("	----------		ERROR CHECK FDIN	----------\n");
 	/* printf("if\n	((fdin = [%d] = -1) || (fdout = [%d] = -1))\n	return (-1);\n", fdin, fdout); */
 	if (fdin == -1 || fdout == -1)
 	{
-		perror("ERROR");
+		perror("	ERROR");
 	/* printf("---------------------------------------------------------------------\n"); */
 	}
 	FT_((fdin == -1 || fdout == -1), -1);

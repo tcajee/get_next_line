@@ -23,8 +23,6 @@
 # define OPEN_MAX 1024
 # elif defined(__unix__)
 # define OPEN_MAX 1024
-# else
-# define OPEN_MAX INT_MAX
 
 #endif
 typedef	struct		s_list

@@ -12,12 +12,12 @@
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFF_SIZE 2048
+# define BUFF_SIZE 1
 # include "./libft/libft.h"
 
 typedef struct	s_files
 {
-	char		*file[255];
+	char		*file[1024];
 	char		*line;
 }				t_files;
 
