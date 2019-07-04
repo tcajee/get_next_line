@@ -39,7 +39,10 @@ printf("-------------------------------ERROR CHECK FDIN-------------------------
 
 	printf("if\n	((fdin = [%d] = -1) || (fdout = [%d] = -1))\n	return (-1);\n\n", fdin, fdout);
 	if (fdin == -1 || fdout == -1)
+	{
 		perror("error: ");
+	printf("---------------------------------------------------------------------\n\n");
+	}
 	FT_((fdin == -1 || fdout == -1), -1);
 
 printf("-----------------------------------DUP2----------------------------------\n\n");
@@ -47,8 +50,9 @@ printf("-----------------------------------DUP2---------------------------------
 	/* int max = sysconf(_SC_OPEN_MAX); */
 	/* printf("int max = [%d] = sysconf(_SC_OPEN_MAX);\n", max); */
 
-	fdin = dup2(fdin, 1024);
-	printf("fdin = [%d] = dup2(fdin, [%d]);\n\n", fdin, 1024);
+	printf("OPEN_MAX = [%d]\n", OPEN_MAX);
+	fdin = dup2(fdin, 1023);
+	printf("fdin = [%d] = dup2(fdin, [%d]);\n\n", fdin, 1023);
 
 	/* fdin = dup2(fdin, _SC_OPEN_MAX); */
 	/* printf("fdin = [%d] = dup2(fdin, [%d]);\n\n", fdin, _SC_OPEN_MAX); */
@@ -62,7 +66,10 @@ printf("-------------------------------ERROR CHECK FDIN-------------------------
 
 	printf("if\n	((fdin = [%d] = -1) || (fdout = [%d] = -1))\n	return (-1);\n\n", fdin, fdout);
 	if (fdin == -1 || fdout == -1)
+	{
 		perror("ERROR");
+	printf("---------------------------------------------------------------------\n\n");
+	}
 	FT_((fdin == -1 || fdout == -1), -1);
 
 printf("---------------------------CALL GNL TO FILL OUTFILE---------------------------\n\n");

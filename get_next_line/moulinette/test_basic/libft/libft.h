@@ -17,7 +17,16 @@
 # include <unistd.h>
 # define FT_(x, y) if (x) return y;
 # define INT_MAX 2147483647
+# if defined(__APPLE__) && defined(__MACH__) // Apple OSX and iOS (Darwin)
+# define OPEN_MAX 4864
+# elif defined(__linux__) /*Debian,Ubuntu,Gentoo,Fedora,openSUSE,RedHat,Centos*/
+# define OPEN_MAX 1024
+# elif defined(__unix__)
+# define OPEN_MAX 1024
+# else
+# define OPEN_MAX INT_MAX
 
+#endif
 typedef	struct		s_list
 {
 	void			*content;
