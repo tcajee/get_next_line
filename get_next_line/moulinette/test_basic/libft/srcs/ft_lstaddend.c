@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_lstaddend.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 16:38:11 by anorman           #+#    #+#             */
-/*   Updated: 2019/06/20 17:04:43 by anorman          ###   ########.fr       */
+/*   Created: 2019/06/05 12:37:58 by anorman           #+#    #+#             */
+/*   Updated: 2019/06/13 16:04:23 by anorman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <unistd.h>
-# include "libft/includes/libft.h"
+#include "libft.h"
 
-# define BUFF_SIZE 70
-
-typedef struct	s_bmark
+void	ft_lstaddend(t_list **alst, t_list *new)
 {
-	char			*red;
-	int				fd;
-	struct s_bmark	*next;
-}				t_bmark;
+	t_list	*temp;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (alst)
+	{
+		if (!*alst && new)
+		{
+			*alst = new;
+			(*alst)->next = NULL;
+		}
+		else
+		{
+			temp = *alst;
+			while (temp->next)
+				temp = temp->next;
+			temp->next = new;
+		}
+	}
+}

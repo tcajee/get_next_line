@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 16:38:11 by anorman           #+#    #+#             */
-/*   Updated: 2019/06/20 17:04:43 by anorman          ###   ########.fr       */
+/*   Created: 2019/05/25 17:19:17 by anorman           #+#    #+#             */
+/*   Updated: 2019/05/31 09:59:09 by anorman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <unistd.h>
-# include "libft/includes/libft.h"
+#include "libft.h"
 
-# define BUFF_SIZE 70
-
-typedef struct	s_bmark
+char	*ft_strmap(const char *s, char (*f)(char))
 {
-	char			*red;
-	int				fd;
-	struct s_bmark	*next;
-}				t_bmark;
+	char	*res;
+	int		cnt;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	if (!s)
+		return (NULL);
+	if (!(res = malloc((ft_strlen(s) + 1) * sizeof(char))))
+		return (NULL);
+	cnt = 0;
+	while (s[cnt])
+	{
+		res[cnt] = f(s[cnt]);
+		cnt++;
+	}
+	res[cnt] = '\0';
+	return (res);
+}

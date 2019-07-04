@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 16:38:11 by anorman           #+#    #+#             */
-/*   Updated: 2019/06/20 17:04:43 by anorman          ###   ########.fr       */
+/*   Created: 2019/05/21 09:34:33 by anorman           #+#    #+#             */
+/*   Updated: 2019/05/26 16:49:03 by anorman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <unistd.h>
-# include "libft/includes/libft.h"
+#include "libft.h"
 
-# define BUFF_SIZE 70
-
-typedef struct	s_bmark
+void	ft_putchar(char c)
 {
-	char			*red;
-	int				fd;
-	struct s_bmark	*next;
-}				t_bmark;
-
-int				get_next_line(const int fd, char **line);
-
-#endif
+	write(1, &c, 1);
+}

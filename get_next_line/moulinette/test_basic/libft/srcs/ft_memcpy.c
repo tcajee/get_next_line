@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 16:38:11 by anorman           #+#    #+#             */
-/*   Updated: 2019/06/20 17:04:43 by anorman          ###   ########.fr       */
+/*   Created: 2019/05/21 09:33:34 by anorman           #+#    #+#             */
+/*   Updated: 2019/06/13 16:18:36 by anorman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <unistd.h>
-# include "libft/includes/libft.h"
+#include <string.h>
 
-# define BUFF_SIZE 70
-
-typedef struct	s_bmark
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	char			*red;
-	int				fd;
-	struct s_bmark	*next;
-}				t_bmark;
+	size_t		cnt;
+	char		*chardst;
+	const char	*charsrc;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	cnt = 0;
+	chardst = (char *)dst;
+	charsrc = (const char *)src;
+	if (dst && src)
+		while (cnt < n && dst != src)
+		{
+			chardst[cnt] = charsrc[cnt];
+			cnt++;
+		}
+	return (dst);
+}

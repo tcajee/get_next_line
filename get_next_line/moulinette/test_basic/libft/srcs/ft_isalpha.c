@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 16:38:11 by anorman           #+#    #+#             */
-/*   Updated: 2019/06/20 17:04:43 by anorman          ###   ########.fr       */
+/*   Created: 2019/05/21 09:34:00 by anorman           #+#    #+#             */
+/*   Updated: 2019/05/23 16:13:02 by anorman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <unistd.h>
-# include "libft/includes/libft.h"
-
-# define BUFF_SIZE 70
-
-typedef struct	s_bmark
+int		ft_isalpha(int c)
 {
-	char			*red;
-	int				fd;
-	struct s_bmark	*next;
-}				t_bmark;
+	if (c > 64 && c < 91)
+		return (8);
+	if (c > 96 && c < 123)
+		return (8);
+	return (0);
+}
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+/*
+** returns nonzero if the value matches a decimal or octal
+** alphabet character.
+*/

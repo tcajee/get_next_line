@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 16:38:11 by anorman           #+#    #+#             */
-/*   Updated: 2019/06/20 17:04:43 by anorman          ###   ########.fr       */
+/*   Created: 2019/05/21 09:36:44 by anorman           #+#    #+#             */
+/*   Updated: 2019/06/13 16:38:41 by anorman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <unistd.h>
-# include "libft/includes/libft.h"
+#include "libft.h"
 
-# define BUFF_SIZE 70
-
-typedef struct	s_bmark
+size_t	ft_strlen(const char *str)
 {
-	char			*red;
-	int				fd;
-	struct s_bmark	*next;
-}				t_bmark;
+	size_t	count;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	count = 0;
+	if (!str)
+		return (0);
+	while (str[count] != '\0')
+		count++;
+	return (count);
+}

@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 16:38:11 by anorman           #+#    #+#             */
-/*   Updated: 2019/06/20 17:04:43 by anorman          ###   ########.fr       */
+/*   Created: 2019/05/21 09:32:57 by anorman           #+#    #+#             */
+/*   Updated: 2019/06/13 16:20:49 by anorman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <unistd.h>
-# include "libft/includes/libft.h"
+#include <strings.h>
 
-# define BUFF_SIZE 70
-
-typedef struct	s_bmark
+void	*ft_memset(void *b, int c, size_t len)
 {
-	char			*red;
-	int				fd;
-	struct s_bmark	*next;
-}				t_bmark;
+	size_t			cnt;
+	unsigned char	ch;
+	char			*vdb;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	cnt = 0;
+	ch = (unsigned char)c;
+	vdb = b;
+	if (b)
+		while (cnt < len)
+		{
+			vdb[cnt] = ch;
+			cnt++;
+		}
+	return (b);
+}

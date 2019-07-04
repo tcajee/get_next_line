@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 16:38:11 by anorman           #+#    #+#             */
-/*   Updated: 2019/06/20 17:04:43 by anorman          ###   ########.fr       */
+/*   Created: 2019/05/21 13:26:37 by anorman           #+#    #+#             */
+/*   Updated: 2019/06/13 17:12:14 by anorman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <unistd.h>
-# include "libft/includes/libft.h"
+#include "libft.h"
 
-# define BUFF_SIZE 70
-
-typedef struct	s_bmark
+char	*ft_strrchr(const char *s, int c)
 {
-	char			*red;
-	int				fd;
-	struct s_bmark	*next;
-}				t_bmark;
+	int		cnt;
+	char	*tmp;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	cnt = 0;
+	tmp = NULL;
+	if (!s)
+		return (NULL);
+	while (s[cnt] != '\0')
+	{
+		if (s[cnt] == (char)c)
+			tmp = (char *)&s[cnt];
+		cnt++;
+	}
+	if (s[cnt] == (char)c)
+		tmp = (char *)&s[cnt];
+	return (tmp);
+}

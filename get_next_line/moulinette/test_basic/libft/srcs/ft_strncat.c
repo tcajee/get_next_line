@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 16:38:11 by anorman           #+#    #+#             */
-/*   Updated: 2019/06/20 17:04:43 by anorman          ###   ########.fr       */
+/*   Created: 2019/05/21 10:42:03 by anorman           #+#    #+#             */
+/*   Updated: 2019/06/13 16:58:30 by anorman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <unistd.h>
-# include "libft/includes/libft.h"
+#include "libft.h"
 
-# define BUFF_SIZE 70
-
-typedef struct	s_bmark
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	char			*red;
-	int				fd;
-	struct s_bmark	*next;
-}				t_bmark;
+	size_t	cnt1;
+	size_t	cnt2;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	cnt1 = 0;
+	cnt2 = 0;
+	if (!s1 || !s2)
+		return (s1);
+	while (s1[cnt1])
+		cnt1++;
+	while (cnt2 < n && s2[cnt2])
+	{
+		s1[cnt1] = s2[cnt2];
+		cnt1++;
+		cnt2++;
+	}
+	s1[cnt1] = '\0';
+	return (s1);
+}

@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anorman <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 16:38:11 by anorman           #+#    #+#             */
-/*   Updated: 2019/06/20 17:04:43 by anorman          ###   ########.fr       */
+/*   Created: 2019/05/21 09:36:19 by anorman           #+#    #+#             */
+/*   Updated: 2019/06/13 17:10:19 by anorman          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <unistd.h>
-# include "libft/includes/libft.h"
-
-# define BUFF_SIZE 70
-
-typedef struct	s_bmark
+char	*ft_strcpy(char *dst, const char *src)
 {
-	char			*red;
-	int				fd;
-	struct s_bmark	*next;
-}				t_bmark;
+	int		cnt;
 
-int				get_next_line(const int fd, char **line);
-
-#endif
+	cnt = 0;
+	if (dst && src)
+	{
+		while (src[cnt] != '\0')
+		{
+			dst[cnt] = src[cnt];
+			cnt++;
+		}
+		dst[cnt] = '\0';
+	}
+	return (dst);
+}
