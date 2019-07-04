@@ -53,7 +53,7 @@ printf("	----------		DUP2			----------\n");
 	/* printf("int max = [%d] = sysconf(_SC_OPEN_MAX);\n", max); */
 
 	/* printf("OPEN_MAX = [%d]\n", OPEN_MAX); */
-	fdin = dup2(fdin, 1023);
+	fdin = dup2(fdin, 1024);
 	/* printf("fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1023); */
 
 	/* fdin = dup2(fdin, _SC_OPEN_MAX); */
