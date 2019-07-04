@@ -17,7 +17,7 @@
 
 typedef struct	s_files
 {
-	char		*file[1025];
+	char		*file[_SC_OPEN_MAX];
 	char		*line;
 }				t_files;
 
