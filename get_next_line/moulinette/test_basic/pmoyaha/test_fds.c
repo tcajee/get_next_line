@@ -6,7 +6,7 @@
 /*   By: ly <ly@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 19:23:15 by ly                #+#    #+#             */
-/*   Updated: 2019/07/04 12:27:22 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/07/05 10:45:30 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ printf("	----------		ERROR CHECK FDIN	----------\n");
 printf("	----------		DUP2			----------\n");
 
 	/* int max = sysconf(_SC_OPEN_MAX); */
-	/* printf("int max = [%d] = sysconf(_SC_OPEN_MAX);\n", max); */
-
+	/* printf("	int max = [%d] = sysconf(_SC_OPEN_MAX);\n", max); */
+	
 	/* printf("OPEN_MAX = [%d]\n", OPEN_MAX); */
+
 	fdin = dup2(fdin, 1024);
-	printf("fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1023);
+	printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1024);
 
 	/* fdin = dup2(fdin, _SC_OPEN_MAX); */
 	/* printf("fdin = [%d] = dup2(fdin, [%d]);\n", fdin, _SC_OPEN_MAX); */
@@ -72,7 +73,7 @@ printf("	----------		ERROR CHECK FDIN	----------\n");
 		perror("	ERROR");
 	/* printf("---------------------------------------------------------------------\n"); */
 	}
-	FT_((fdin == -1 || fdout == -1), -1);
+	/* FT_((fdin == -1 || fdout == -1), -1); */
 
 printf("	----------		CALL GNL		----------\n");
 
