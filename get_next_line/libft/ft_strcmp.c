@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   strcmp.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 13:27:32 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/27 16:07:24 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/27 10:05:50 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/06/04 15:55:21 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_strcmp(const char *s1, const char *s2)
+int		ft_strcmp(const char *s1, const char *s2)
 {
-	size_t			i;
-	unsigned char	*str1;
-	unsigned char	*str2;
+	int				i;
+	unsigned char	*ss1;
+	unsigned char	*ss2;
 
 	i = 0;
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	FT_(!s1 && !s2, 1);
-	while (str1[i] && (str1[i] == str2[i]))
+	ss1 = (unsigned char *)s1;
+	ss2 = (unsigned char *)s2;
+	while ((ss1[i] || ss2[i]) != '\0')
+	{
+		if (ss1[i] != ss2[i])
+		{
+			i = ss1[i] - ss2[i];
+			return (i);
+		}
 		i++;
-	FT_((str1[i] - str2[i]) > 0, 1);
-	FT_((str1[i] - str2[i]) < 0, -1);
-	return (str1[i] - str2[i]);
+	}
+	return (0);
 }

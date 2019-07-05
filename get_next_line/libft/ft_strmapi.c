@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/30 09:55:21 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/27 16:28:03 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/29 12:45:09 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/06/06 14:18:43 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,20 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	i;
-	char	*cursor;
-	char	*new;
+	int		i;
+	char	*ss;
 
-	new = NULL;
-	if (s && f)
+	ss = (char *)s;
+	i = 0;
+	if (s)
+		ss = (char *)malloc(ft_strlen(ss) + 1 * sizeof(char));
+	if (ss == NULL)
+		return (NULL);
+	while (s[i] != '\0')
 	{
-		i = 0;
-		FT_(!(new = ft_strnew(ft_strlen(s))), NULL);
-		cursor = new;
-		while (*s)
-			*cursor++ = f(i++, *s++);
+		ss[i] = f(i, s[i]);
+		i++;
 	}
-	return (new);
+	ss[i] = '\0';
+	return (ss);
 }

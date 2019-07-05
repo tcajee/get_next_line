@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   memcpy.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/24 11:54:04 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/27 16:10:11 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/27 10:03:56 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/06/04 15:13:52 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,21 @@
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	size_t	i;
-	char	*dst_h;
-	char	*src_h;
+	char	*dest;
+	char	*source;
 
-	FT_(!src, NULL);
-	if (dst)
+	dest = (char *)dst;
+	source = (char *)src;
+	i = 0;
+	if (*dest == '\0' && *source == '\0')
+		return (dest);
+	while (i < n)
 	{
-		i = -1;
-		dst_h = (char *)dst;
-		src_h = (char *)src;
-		while (++i < n && (dst || src))
-			dst_h[i] = src_h[i];
+		dest[i] = source[i];
+		i++;
 	}
-	return (dst);
+	i = 0;
+	while (dest[i] != '\0')
+		i++;
+	return (dest);
 }

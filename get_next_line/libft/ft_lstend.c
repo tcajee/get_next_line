@@ -1,18 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
+/*   ft_lstend.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/08 18:29:20 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/17 10:33:38 by tcajee           ###   ########.fr       */
+/*   Created: 2019/06/17 09:17:32 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/07/02 07:43:46 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_iswhitespace(char c)
+void	ft_lstend(t_list *head, t_list *new)
 {
-	return (((c >= '\t' && c <= '\r') || c == ' '));
+	t_list *counta;
+	t_list *count;
+
+	if (head)
+	{
+		count = head;
+		while (count->next)
+		{
+			counta = count->next;
+			count = counta;
+		}
+		count->next = new;
+		new->next = NULL;
+	}
 }

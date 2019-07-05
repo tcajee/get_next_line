@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   memalloc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 14:29:57 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/27 16:23:14 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/27 12:05:45 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/06/13 10:21:54 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	*ft_memalloc(size_t size)
 {
-	void *new;
+	void *a;
 
-	FT_(!(new = (void *)malloc(size * sizeof(char))), NULL);
-	return (ft_memset(new, 0, size));
+	a = (void *)malloc(size);
+	if (a == NULL)
+		return (NULL);
+	ft_memset(a, 0, size);
+	return (a);
 }

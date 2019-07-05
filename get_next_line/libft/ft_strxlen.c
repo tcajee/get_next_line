@@ -1,33 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrev.c                                        :+:      :+:    :+:   */
+/*   ft_strxlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/03 17:09:55 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/13 14:50:40 by tcajee           ###   ########.fr       */
+/*   Created: 2019/06/24 12:07:03 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/07/01 10:44:18 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	*ft_strrev(char *s)
+int		ft_strxlen(char *s, char start, char end)
 {
-	char temp;
-	char *end;
-	char *start;
+	int i;
+	int ret;
 
-	if (s)
+	i = 0;
+	ret = 0;
+	while (s[i] != start && s[i])
+		i++;
+	if (s[i] != start)
+		return (0);
+	while (s[i] != end && s[i])
 	{
-		start = s;
-		end = (s + (ft_strlen(s) - 1));
-		while (start < end)
-		{
-			temp = *start;
-			*start++ = *end;
-			*end-- = temp;
-		}
+		i++;
+		ret++;
 	}
-	return (s);
+	return (ret);
 }

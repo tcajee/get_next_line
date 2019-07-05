@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   strlcat.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 09:16:53 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/27 16:02:18 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/27 10:07:06 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/06/13 10:52:13 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,21 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	size_t	i;
-	size_t	dstlen;
-	size_t	catlen;
+	size_t c;
+	size_t b;
+	size_t a;
 
-	catlen = 0;
-	if (src && dst)
+	a = 0;
+	b = 0;
+	c = ft_strlen(src);
+	while (dst[a] && a < dstsize)
+		a++;
+	while (a + b + 1 < dstsize && src[b])
 	{
-		i = 0;
-		dstlen = ft_strlen(dst);
-		catlen = dstlen;
-		if (dstsize < dstlen)
-			catlen = dstsize;
-		catlen += ft_strlen(src);
-		while (dstlen + i < dstsize - 1 && dstsize > 0 && src[i])
-		{
-			dst[dstlen + i] = src[i];
-			i++;
-		}
-		dst[dstlen + i] = '\0';
+		dst[a + b] = src[b];
+		b++;
 	}
-	return (catlen);
+	if (a + b < dstsize)
+		dst[a + b] = '\0';
+	return (a + c);
 }

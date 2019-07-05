@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   memset.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 14:35:24 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/27 16:14:35 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/27 10:04:44 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/06/11 14:34:05 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,17 @@
 
 void	*ft_memset(void *b, int c, size_t len)
 {
-	unsigned char	*dst;
+	size_t			i;
+	unsigned char	*bb;
+	unsigned char	cc;
 
-	FT_(!b, b);
-	dst = (unsigned char *)b;
-	while (len--)
-		*dst++ = (unsigned char)c;
-	return (b);
+	cc = (unsigned char)c;
+	bb = (unsigned char *)b;
+	i = 0;
+	while (i < len)
+	{
+		bb[i] = cc;
+		i++;
+	}
+	return (bb);
 }

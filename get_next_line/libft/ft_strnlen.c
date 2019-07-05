@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strwnext.c                                      :+:      :+:    :+:   */
+/*   ft_strnlen.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 11:35:35 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/13 15:12:11 by tcajee           ###   ########.fr       */
+/*   Created: 2019/06/18 13:16:53 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/07/01 10:42:32 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-const char	*ft_strwnext(const char *s, char c)
+int		ft_strnlen(char *str, char c)
 {
-	if (s)
-	{
-		while (*s && *s == c)
-			s++;
-	}
-	return (s);
+	int i;
+
+	i = 0;
+	while (str && str[i] && str[i] != c)
+		i++;
+	return (i);
 }

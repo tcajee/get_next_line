@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   memmove.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/26 11:21:02 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/27 16:16:09 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/27 10:04:23 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/06/05 09:26:59 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,27 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t			i;
-	unsigned char	*dst_h;
-	unsigned char	*src_h;
+	size_t	i;
+	char	*dest;
+	char	*source;
 
-	if (src && dst)
+	dest = (char *)dst;
+	source = (char *)src;
+	i = 0;
+	if (*dest == '\0' && *source == '\0')
+		return (dest);
+	if (src > dst)
 	{
-		i = -1;
-		dst_h = (unsigned char *)dst;
-		src_h = (unsigned char *)src;
-		if (dst_h < src_h)
+		while (i < len)
 		{
-			while (++i < len)
-				dst_h[i] = src_h[i];
-		}
-		else if (dst_h > src_h)
-		{
-			while (len-- > 0)
-				dst_h[len] = src_h[len];
+			dest[i] = source[i];
+			i++;
 		}
 	}
-	return (dst);
+	if (dst > src)
+	{
+		while (len-- > 0)
+			dest[len] = source[len];
+	}
+	return (dest);
 }

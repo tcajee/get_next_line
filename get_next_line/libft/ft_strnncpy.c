@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strwlen.c                                       :+:      :+:    :+:   */
+/*   ft_strnncpy.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/31 11:37:13 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/13 15:11:38 by tcajee           ###   ########.fr       */
+/*   Created: 2019/06/24 08:23:01 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/06/24 12:12:41 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strwlen(const char *s, char c)
+char	*ft_strnncpy(char *dst, char *src, size_t start, size_t len)
 {
-	size_t len;
+	int i;
 
-	len = 0;
-	if (s)
+	i = 0;
+	dst = (char *)malloc(len - start + 1);
+	while (start < len && src[start])
 	{
-		while (*s && *s++ != c)
-			len++;
+		dst[i] = src[start];
+		i++;
+		start++;
 	}
-	return (len);
+	dst[i] = '\0';
+	return (dst);
 }

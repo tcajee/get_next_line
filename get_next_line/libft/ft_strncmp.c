@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   strncmp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 10:35:23 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/27 16:38:58 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/27 10:08:10 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/06/04 15:56:43 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	int		result;
+	size_t			i;
+	unsigned char	*ss1;
+	unsigned char	*ss2;
 
-	result = 0;
-	if (s1 && s2)
+	i = 0;
+	ss1 = (unsigned char *)s1;
+	ss2 = (unsigned char *)s2;
+	while ((ss1[i] || ss2[i]) && i < n)
 	{
-		if (n > ft_strlen(s1))
-			n = ft_strlen(s1) + 1;
-		if (n > ft_strlen(s2))
-			n = ft_strlen(s2) + 1;
-		result = ft_memcmp(s1, s2, n);
-		FT_(result > 0, 1);
-		FT_(result < 0, -1);
+		if (ss1[i] != ss2[i] || ss2[i] == '\0')
+			return (ss1[i] - ss2[i]);
+		i++;
 	}
-	return (result);
+	i--;
+	return (ss1[i] - ss2[i]);
 }

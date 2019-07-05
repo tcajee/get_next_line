@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/30 16:03:32 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/17 11:25:41 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/29 12:46:48 by gstrauss          #+#    #+#             */
+/*   Updated: 2019/06/13 08:55:27 by gstrauss         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,19 @@
 
 char	*ft_strtrim(char const *s)
 {
-	const char	*start;
-	const char	*end;
-	char		*new;
-	size_t		len;
+	int		i;
+	int		end;
 
-	new = NULL;
-	if (s)
-	{
-		len = 0;
-		end = (s + (ft_strlen(s)));
-		while (ft_iswhitespace(*s) == 1 && *s)
-			s++;
-		start = s;
-		while (ft_iswhitespace(*(end - 1)) == 1 && end != s)
-			end--;
-		while (s++ != end)
-			len++;
-		FT_(!(new = ft_strsub(start, 0, len)), NULL);
-	}
-	return (new);
+	i = 0;
+	if (!s)
+		return (NULL);
+	end = ft_strlen(s);
+	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
+		i++;
+	if (s[i] == '\0')
+		return (ft_strcpy(ft_strnew(1), ""));
+	end--;
+	while (s[end] == ' ' || s[end] == '\n' || s[end] == '\t')
+		end--;
+	return (ft_strsub(s, i, end - i + 1));
 }
