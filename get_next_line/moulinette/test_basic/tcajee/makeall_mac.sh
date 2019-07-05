@@ -2,21 +2,20 @@
 
 cd ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/test_basic_main
 
+cp -r * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/anorman
+cp -r * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/uisrael
+cp -r * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/pmoyaha
+cp -r * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/temp
+cp -r * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/zmadi
+cp -r * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/tcajee
+cp -r * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/kdube
+cp -r * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/rhutchin
+cp -r * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/sminnaar
+cp -r * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/petsoane
+cp -r * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/gstrauss
+cp -r * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/delinde
 
-cp * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/anorman
-cp * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/uisrael
-cp * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/pmoyaha
-cp * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/temp
-cp * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/zmadi
-cp * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/tcajee
-cp * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/kdube
-cp * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/rhutchin
-cp * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/sminnaar
-cp * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/petsoane
-cp * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/gstrauss
-cp * ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/delinde
-
-d ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/tcajee
+cd ~/Desktop/gnl_git/get_next_line/moulinette/test_basic/tcajee
 echo "Testing get_next_line submission by: tcajee"
 read -p "Press enter to continue"
 sh remake.sh
