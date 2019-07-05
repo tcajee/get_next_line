@@ -6,7 +6,7 @@
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 12:27:09 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/02 15:17:54 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/07/05 12:24:25 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 # include <string.h>
 # include <unistd.h>
 # define FT_(x, y) if (x) return y;
-# define INT_MAX 2147483647
 # if defined(__APPLE__) && defined(__MACH__) // Apple OSX and iOS (Darwin)
-# define OPEN_MAX 4864
+# define FT_OPEN_MAX 4864
 # elif defined(__linux__) /*Debian,Ubuntu,Gentoo,Fedora,openSUSE,RedHat,Centos*/
-# define OPEN_MAX 1024
+# define FT_OPEN_MAX 1024
 # elif defined(__unix__)
-# define OPEN_MAX 1024
+# define FT_OPEN_MAX 1024
 
 #endif
 typedef	struct		s_list
