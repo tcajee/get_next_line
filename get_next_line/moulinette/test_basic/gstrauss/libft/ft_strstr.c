@@ -16,13 +16,10 @@ char	*ft_strstr(const char *haystack, const char *needle)
 {
 	int		i;
 	int		o;
-	int		p;
 	char	*ret;
 
 	ret = (char *)haystack;
-	p = 0;
 	i = 0;
-	o = 0;
 	if (ft_strlen(needle) == 0)
 		return (ret);
 	while (ret[i] != '\0')

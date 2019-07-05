@@ -6,54 +6,72 @@
 /*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 11:35:44 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/03 07:38:59 by gstrauss         ###   ########.fr       */
+/*   Updated: 2019/07/05 14:55:08 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "get_next_line.h"
+#include <stdio.h>
 
-char	*linespace(int fd, char *holder)
+static int	assign(char **string, char **temp)
 {
-	int			count;
-	char		*buff;
-	char		*carry_over;
-	int			red;
+	char	*stage;
+/* printf("------------ASSIGN---------------------\n"); */
 
-	buff = (char *)malloc(BUFF_SIZE + 1);
-	count = 0;
-	carry_over = NULL;
-	while ((red = read(fd, buff, BUFF_SIZE)) > 0)
+	stage = ft_strdup(*string);
+	ft_memset(ft_strchr(stage, '\n'), '\0', 1);
+	*temp = ft_strdup(stage);
+	ft_strdel(string);
+	*string = ft_strdup((ft_strchr(stage, '\0')) + 1);
+	ft_strdel(&stage);
+	return (1);
+}
+
+static int	create(int fd, char **string)
+{
+	char		buff[BUFF_SIZE + 1];
+	char		*stage;
+	int			red;
+	
+	while (!ft_strchr(*string, '\n'))
 	{
-		count++;
+/* printf("--------------------CREATE------------------\n"); */
+		if ((red = read(fd, buff, BUFF_SIZE)) == 0)
+			return (0);
+		if (red < 0)
+			return (-1);
 		buff[red] = '\0';
-		holder = (char *)malloc(BUFF_SIZE * (count + 1));
-		holder[0] = '\0';
-		ft_strcat(holder, carry_over);
-		ft_strcat(holder, buff);
-		free(carry_over);
-		carry_over = holder;
+		stage = ft_strjoin(*string, buff);
+		ft_strdel(string);
+		*string = ft_strdup(stage);
+		ft_strdel(&stage);
 	}
-	holder[ft_strlen(holder) + 1] = '\0';
-	free(buff);
-	return (holder);
+	return (1);
 }
 
 int		get_next_line(int fd, char **line)
 {
-	static char	*holder;
+	static char	*string = NULL;
+	char	*temp;
 
-	if (!line || read(fd, NULL, 0) == -1)
+	if (!string)
+		string = ft_strnew(0);
+/* printf("--------------------INIT------------------\n"); */
+	if (fd < 0 || !line || read(fd, NULL, 0) == -1)
 		return (-1);
-	holder = linespace(fd, holder);
-	*line = (char *)malloc(ft_strnlen(holder, '\n') + 1);
-	ft_bzero(*line, ft_strlen(*line));
-	(*line)[ft_strnlen(holder, '\n') + 1] = '\0';
-	ft_strncat(*line, holder, ft_strnlen(holder, '\n'));
-	if (!ft_strcut(holder, '\n'))
+	if (create(fd, &string) < 0)
+		return (-1);
+	if (ft_strchr(string, '\n'))
 	{
-		free(holder);
-		return (0);
+		assign(&string, &temp);
+		*line = ft_strdup(temp);
+		ft_strdel(&temp);
 	}
+	else if (ft_strlen(string) > 0)
+	{
+		*line = ft_strdup(string);
+	}
+	else
+		return (0);
 	return (1);
 }

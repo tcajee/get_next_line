@@ -14,7 +14,6 @@
 
 void	ft_del(void *s, size_t n)
 {
-	ft_bzero(s, ft_strlen(s));
+	ft_bzero(s, n);
 	free(s);
-	n = '\0';
 }
