@@ -13,6 +13,7 @@ cp * /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/kdube
 cp * /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/rhutchin
 cp * /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/sminnaar
 cp * /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/petsoane
+cp * /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/gstrauss
 
 cd /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/tcajee
 echo "Testing get_next_line submission by: tcajee"
@@ -59,5 +60,9 @@ echo "Testing get_next_line submission by: petsoane"
 read -p "Press enter to continue"
 sh remake.sh
 read -p "Press enter to continue"
+cd /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/gstrauss
+echo "Testing get_next_line submission by: gstrauss"
+read -p "Press enter to continue"
+sh remake.sh
 echo "Testing complete"
 read -p "Press enter to continue"
