@@ -6,15 +6,17 @@
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 12:27:09 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/05 12:24:25 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/07/05 15:31:51 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define FT_(x, y) if (x) return y;
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+<<<<<<< HEAD
 # define FT_(x, y) if (x) return y;
 
 
@@ -23,10 +25,17 @@
 # define FT_OPEN_MAX 4864
 # elif defined(__linux__) /*Debian,Ubuntu,Gentoo,Fedora,openSUSE,RedHat,Centos*/
 # define FT_OPEN_MAX 1024
-# elif defined(__unix__)
-# define FT_OPEN_MAX 1024
+=======
 
-#endif
+# if defined(__APPLE__) && defined(__MACH__)
+#  define FT_FDS 4864
+# elif defined(__linux__)
+#  define FT_FDS 1024
+>>>>>>> e8f0b29e219526aa57baba1a7b124dbee79a0908
+# elif defined(__unix__)
+#  define FT_FDS 1024
+# endif
+
 typedef	struct		s_list
 {
 	void			*content;
