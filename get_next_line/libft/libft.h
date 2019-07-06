@@ -16,7 +16,10 @@
 # include <string.h>
 # include <unistd.h>
 # define FT_(x, y) if (x) return y;
-# if defined(__APPLE__) && defined(__MACH__) // Apple OSX and iOS (Darwin)
+
+
+
+ # if defined(__APPLE__) && defined(__MACH__) // Apple OSX and iOS (Darwin)
 # define FT_OPEN_MAX 4864
 # elif defined(__linux__) /*Debian,Ubuntu,Gentoo,Fedora,openSUSE,RedHat,Centos*/
 # define FT_OPEN_MAX 1024
