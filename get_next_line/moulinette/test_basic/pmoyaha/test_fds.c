@@ -6,7 +6,7 @@
 /*   By: ly <ly@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 19:23:15 by ly                #+#    #+#             */
-/*   Updated: 2019/07/05 13:33:48 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/07/06 04:39:16 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,21 @@ printf("	----------		ERROR CHECK FDIN	----------\n");
 
 printf("	----------		DUP2			----------\n");
 
-	/* int max = sysconf(_SC_OPEN_MAX); */
-	/* printf("	int max = [%d] = sysconf(_SC_OPEN_MAX);\n", max); */
+	int max = sysconf(_SC_OPEN_MAX);
+	printf("	int max = [%d] = sysconf(_SC_OPEN_MAX);\n", max);
 	
 	/* printf("	OPEN_MAX = [%d]\n", OPEN_MAX); */
 
-	/* fdin = dup2(fdin, max - 1); */
-	/* printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, max - 1); */
-	
 	fdin = dup2(fdin, 1024);
 	printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1024);
+	
+	/* fdin = dup2(fdin, 1024); */
+	/* printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1024); */
 
 	/* printf("	fcntl(old-filedes, F_DUPFD, new-filedes)\n"); */
 	/* printf("	fdin = [%d] = open(test1.in, O_RDONLY);\n", fdin); */
 	/* fdin =	fcntl(fdin, F_DUPFD, max); */
-	/* printf("	fdin2 = [%d] = fctnl([%d], F_DUPFD, [%d]);\n", fdin, fdin, max); */
+	/* printf("	fdin2 = [%d] = fctnl([%d], F_DUPFD, [%d]);\n", fdin, fdin, max -1); */
 
 printf("	----------		ERROR CHECK FDIN	----------\n");
 

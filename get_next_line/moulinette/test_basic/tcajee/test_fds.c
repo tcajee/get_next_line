@@ -6,7 +6,7 @@
 /*   By: ly <ly@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 19:23:15 by ly                #+#    #+#             */
-/*   Updated: 2019/07/06 03:06:37 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/07/06 04:39:16 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ printf("	----------		DUP2			----------\n");
 	
 	/* printf("	OPEN_MAX = [%d]\n", OPEN_MAX); */
 
-	fdin = dup2(fdin, max);
-	printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, max);
+	fdin = dup2(fdin, 1024);
+	printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1024);
 	
 	/* fdin = dup2(fdin, 1024); */
 	/* printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1024); */

@@ -6,7 +6,7 @@
 /*   By: ly <ly@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/04 19:23:15 by ly                #+#    #+#             */
-/*   Updated: 2019/07/03 16:21:35 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/07/06 04:38:59 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ printf("	----------		OPEN FILES		----------\n");
 	int		fdin =	open("test1.in", O_RDONLY);
 	/* printf("int	fdin	=	[%d]	=	open(test1.in, O_RDONLY);\n", fdin); */
 
-	int		fdout =	open("testfd.out", O_WRONLY|O_CREAT);
+	int		fdout =	open("test1.out", O_WRONLY|O_CREAT);
 	/* printf("int	fdout	=	[%d]	=	open(testfd.out, O_WRONLY|O_CREAT);\n", fdout); */
 
 	int		r00 = 0;
