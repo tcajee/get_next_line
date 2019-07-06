@@ -1,42 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   atoi.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 09:59:03 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/06/13 10:47:08 by gstrauss         ###   ########.fr       */
+/*   Created: 2019/05/21 14:52:36 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/27 16:19:57 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	int		res;
-	int		sign;
-	int		i;
+	long		res;
+	long		sign;
+	const char	*input;
 
 	res = 0;
+	input = str;
 	sign = 1;
-	i = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'\
-			|| str[i] == '\r' || str[i] == '\f' || str[i] == '\v')
-		i++;
-	if (str[i] == '-')
+	if (str)
 	{
-		sign = -1;
-		i++;
+		while (ft_iswhitespace(*input) == 1)
+			input++;
+		if (*input == '-' || *input == '+')
+		{
+			if (*input == '-')
+				sign = -1;
+			input++;
+		}
+		while (*input && ft_isdigit(*input))
+			res = res * 10 + (*input++ - '0');
 	}
-	else if (str[i] == '+')
-		i++;
-	while (str[i] != '\0')
-	{
-		if (str[i] > '9' || str[i] < '0')
-			return (res * sign);
-		res = res * 10 + str[i] - '0';
-		i++;
-	}
-	return (sign * res);
+	return ((int)res * (int)sign);
 }

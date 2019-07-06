@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/29 09:10:46 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/06/06 14:25:00 by gstrauss         ###   ########.fr       */
+/*   Created: 2019/05/23 11:17:53 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/28 13:40:34 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,8 @@
 
 void	ft_putstr_fd(char const *s, int fd)
 {
-	char	*ss;
-	int		i;
-
 	if (!s)
 		return ;
-	ss = (char *)s;
-	i = 0;
-	while (ss[i] != '\0')
-	{
-		ft_putchar_fd(ss[i], fd);
-		i++;
-	}
+	while (*s)
+		ft_putchar_fd(*s++, fd);
 }

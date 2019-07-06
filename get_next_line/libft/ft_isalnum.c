@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isalnum.c                                          :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 09:59:25 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/06/13 10:19:19 by gstrauss         ###   ########.fr       */
+/*   Created: 2019/05/21 14:35:18 by tcajee            #+#    #+#             */
+/*   Updated: 2019/05/21 14:44:22 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isalnum(int c)
+#include "libft.h"
+
+int	ft_isalnum(int c)
 {
-	if ((c > 64 && c < 91) || (c > 96 && c < 123))
-		return (1);
-	else if (c < 58 && c > 47)
-		return (1);
-	else
-		return (0);
+	return ((c < 91 && c > 64) || (c < 123 && c > 96) || (c < 58 && c > 47));
 }

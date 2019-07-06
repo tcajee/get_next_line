@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strstr.c                                           :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 10:09:57 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/06/13 11:02:27 by gstrauss         ###   ########.fr       */
+/*   Created: 2019/05/23 10:39:08 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/17 11:23:38 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,14 @@
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {
-	int		i;
-	int		o;
-	char	*ret;
+	int i;
 
-	ret = (char *)haystack;
 	i = 0;
-	o = 0;
-	if (ft_strlen(needle) == 0)
-		return (ret);
-	while (ret[i] != '\0')
+	FT_(needle[0] == '\0', ((char *)haystack));
+	while (haystack[i])
 	{
-		o = 0;
-		if (ret[i] == needle[o])
-		{
-			while (ret[i + o] == needle[o] && needle[o])
-				o++;
-			if (needle[o] == '\0')
-				return (&ret[i]);
-		}
+		FT_(haystack[i] == needle[0] && (ft_strncmp(&haystack[i], needle, \
+						ft_strlen(needle))) == 0, ((char *)&haystack[i]));
 		i++;
 	}
 	return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/29 12:41:58 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/06/06 14:16:34 by gstrauss         ###   ########.fr       */
+/*   Created: 2019/05/29 14:34:47 by tcajee            #+#    #+#             */
+/*   Updated: 2019/07/02 15:03:47 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,5 @@
 void	ft_strdel(char **as)
 {
 	if (as)
-	{
-		free(*as);
-		*as = NULL;
-	}
+		ft_memdel((void **)as);
 }

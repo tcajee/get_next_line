@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/29 12:40:35 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/06/06 14:25:23 by gstrauss         ###   ########.fr       */
+/*   Created: 2019/05/23 14:01:37 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/28 13:47:40 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	if (n == -2147483648)
-	{
-		ft_putstr_fd("-2147483648", fd);
+	if (fd < 0)
 		return ;
-	}
 	if (n < 0)
 	{
+		if (n == -2147483648)
+			return (ft_putstr_fd("-2147483648", fd));
+		else
+			ft_putchar_fd('-', fd);
 		n *= -1;
-		ft_putchar_fd('-', fd);
 	}
 	if (n > 9)
+	{
 		ft_putnbr_fd(n / 10, fd);
-	ft_putchar_fd(n % 10 + 48, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else if (ft_isdigit(n + 48))
+		ft_putchar_fd(n + 48, fd);
 }

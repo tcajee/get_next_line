@@ -49,16 +49,16 @@ printf("	----------		ERROR CHECK FDIN	----------\n");
 
 printf("	----------		DUP2			----------\n");
 
-	int max = sysconf(_SC_OPEN_MAX);
-	printf("	int max = [%d] = sysconf(_SC_OPEN_MAX);\n", max);
+	/* int max = sysconf(_SC_OPEN_MAX); */
+	/* printf("	int max = [%d] = sysconf(_SC_OPEN_MAX);\n", max); */
 	
 	/* printf("	OPEN_MAX = [%d]\n", OPEN_MAX); */
 
-	fdin = dup2(fdin, max - 1);
-	printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, max - 1);
+	/* fdin = dup2(fdin, max - 1); */
+	/* printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, max - 1); */
 	
-	/* fdin = dup2(fdin, 1024); */
-	/* printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1024); */
+	fdin = dup2(fdin, 1024);
+	printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1024);
 
 	/* printf("	fcntl(old-filedes, F_DUPFD, new-filedes)\n"); */
 	/* printf("	fdin = [%d] = open(test1.in, O_RDONLY);\n", fdin); */

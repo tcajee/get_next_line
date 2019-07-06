@@ -1,75 +1,68 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gnltest.c                                          :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/02 11:35:44 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/07/05 14:55:08 by tcajee           ###   ########.fr       */
+/*   Created: 2019/06/17 10:15:46 by tcajee            #+#    #+#             */
+/*   Updated: 2019/07/02 15:31:05 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
-static int	assign(char **string, char **temp)
+static int	copy_next_line(t_files *files, int fd)
 {
+	char	*trace;
+	int		index;
+
+	trace = files->file[fd];
+	index = ft_strchr(trace, '\n') - trace;
+	FT_(!(files->line = ft_strsub(trace, 0, index)), -1);
+	FT_(!(files->file[fd] =
+		ft_strsub(trace, index + 1, ft_strlen(trace) - index)), -1);
+	ft_strdel(&trace);
+	return (1);
+}
+
+static int	find_next_line(t_files *files, int fd)
+{
+	char	buffer[BUFF_SIZE + 1];
 	char	*stage;
-/* printf("------------ASSIGN---------------------\n"); */
+	long	bytes;
 
-	stage = ft_strdup(*string);
-	ft_memset(ft_strchr(stage, '\n'), '\0', 1);
-	*temp = ft_strdup(stage);
-	ft_strdel(string);
-	*string = ft_strdup((ft_strchr(stage, '\0')) + 1);
-	ft_strdel(&stage);
-	return (1);
-}
-
-static int	create(int fd, char **string)
-{
-	char		buff[BUFF_SIZE + 1];
-	char		*stage;
-	int			red;
-	
-	while (!ft_strchr(*string, '\n'))
+	if (!files->file[fd])
+		files->file[fd] = ft_strnew(0);
+	while (ft_strchr(files->file[fd], '\n') == NULL)
 	{
-/* printf("--------------------CREATE------------------\n"); */
-		if ((red = read(fd, buff, BUFF_SIZE)) == 0)
-			return (0);
-		if (red < 0)
-			return (-1);
-		buff[red] = '\0';
-		stage = ft_strjoin(*string, buff);
-		ft_strdel(string);
-		*string = ft_strdup(stage);
-		ft_strdel(&stage);
+		FT_((bytes = read(fd, buffer, BUFF_SIZE)) == 0, 0);
+		FT_(bytes < 0, -1);
+		buffer[bytes] = '\0';
+		FT_(!(stage = ft_strjoin(files->file[fd], buffer)), -1);
+		ft_strdel(&files->file[fd]);
+		files->file[fd] = stage;
 	}
 	return (1);
 }
 
-int		get_next_line(int fd, char **line)
+int			get_next_line(const int fd, char **line)
 {
-	static char	*string = NULL;
-	char	*temp;
+	static t_files files;
 
-	if (!string)
-		string = ft_strnew(0);
-/* printf("--------------------INIT------------------\n"); */
-	if (fd < 0 || !line || read(fd, NULL, 0) == -1)
-		return (-1);
-	if (create(fd, &string) < 0)
-		return (-1);
-	if (ft_strchr(string, '\n'))
+	FT_((read(fd, NULL, 0) == -1), -1);
+	FT_((fd < 0 || !line || read(fd, NULL, 0) == -1), -1);
+	FT_(find_next_line(&files, fd) < 0, -1);
+	if (ft_strchr(files.file[fd], '\n') != NULL)
 	{
-		assign(&string, &temp);
-		*line = ft_strdup(temp);
-		ft_strdel(&temp);
+		FT_(copy_next_line(&files, fd) < 0, -1);
+		FT_(!(*line = ft_strdup(files.line)), -1);
+		ft_strdel(&files.line);
 	}
-	else if (ft_strlen(string) > 0)
+	else if (ft_strlen(files.file[fd]) > 0)
 	{
-		*line = ft_strdup(string);
+		FT_(!(*line = ft_strdup(files.file[fd])), -1);
+		ft_strdel(&files.file[fd]);
 	}
 	else
 		return (0);

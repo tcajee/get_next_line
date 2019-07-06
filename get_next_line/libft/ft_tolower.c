@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tolower.c                                          :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gstrauss <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 10:10:21 by gstrauss          #+#    #+#             */
-/*   Updated: 2019/06/05 10:20:06 by gstrauss         ###   ########.fr       */
+/*   Created: 2019/05/20 13:59:01 by tcajee            #+#    #+#             */
+/*   Updated: 2019/05/21 14:47:32 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_tolower(int c)
+#include "libft.h"
+
+int	ft_tolower(int c)
 {
-	if (c > 64 && c < 91)
-		c = c + 32;
-	else
-		return (c);
+	FT_(c < 91 && c > 64, c += 32);
 	return (c);
 }
