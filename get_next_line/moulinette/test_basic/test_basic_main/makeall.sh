@@ -15,8 +15,9 @@ cd /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/test_basic
 # cp * /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/gstrauss
 # cp * /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/dlinde
 # cp * /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/kseperep
+# cp * /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/lnkambul
 
-cp * /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/lnkambul
+cp * /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/vesingh
 
 # cd /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/tcajee
 # echo "Testing get_next_line submission by: tcajee"
@@ -90,13 +91,17 @@ cp * /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/lnkambul
 # sh remake.sh
 # rm main.c main.o makeall_mac.sh makeall.sh Makefile output.txt profile.yml remake.sh temp.sh test1.in test_fds.c tests.h test_simple.c unit.py
 # read -p "Press enter to continue"
+# cd /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/lnkambul
+# echo "Testing get_next_line submission by: lnkambul"
+# read -p "Press enter to continue"
+# sh remake.sh
+# rm main.c main.o makeall_mac.sh makeall.sh Makefile output.txt profile.yml remake.sh temp.sh test1.in test_fds.c tests.h test_simple.c unit.py
 
-cd /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/lnkambul
-echo "Testing get_next_line submission by: lnkambul"
+cd /home/emptycee/Desktop/gnl_git/get_next_line/moulinette/test_basic/vesingh
+echo "Testing get_next_line submission by: vesingh"
 read -p "Press enter to continue"
 sh remake.sh
 rm main.c main.o makeall_mac.sh makeall.sh Makefile output.txt profile.yml remake.sh temp.sh test1.in test_fds.c tests.h test_simple.c unit.py
-
 #---------------------------------------
 echo "Testing complete"
 read -p "Press enter to continue"
