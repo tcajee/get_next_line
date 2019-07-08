@@ -37,8 +37,8 @@ static int	find_new_line(t_files *files, int fd)
 	while (ft_strchr(files->file[fd], '\n') == NULL)
 	{
 		FT_((bytes = read(fd, buffer, BUFF_SIZE)) == 0, 0);
-		buffer[bytes] = '\0';
 		FT_(bytes < 0, -1);
+		buffer[bytes] = '\0';
 		FT_(!(stage = ft_strjoin(files->file[fd], buffer)), -1);
 		ft_strdel(&files->file[fd]);
 		files->file[fd] = stage;

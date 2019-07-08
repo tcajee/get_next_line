@@ -26,7 +26,7 @@ int	main(void)
 
 	line = NULL;
 	x = 1;
-	fd = open("./test.txt", O_RDONLY);
+	fd = open("./bible.txt", O_RDONLY);
 	total = 0;
 printf("--------------------------------------------\n");
 	while (x > 0)
