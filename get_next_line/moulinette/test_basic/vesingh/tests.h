@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   tests.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnagy <lnagy@student.42.fr>                +#+  +:+       +#+        */
+/*   By: ly <ly@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/23 01:26:54 by lnagy             #+#    #+#             */
-/*   Updated: 2015/12/23 01:46:56 by lnagy            ###   ########.fr       */
+/*   Created: 2015/11/23 18:23:01 by lle-blev          #+#    #+#             */
+/*   Updated: 2016/03/23 16:15:51 by ly               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef TESTS_H
+# define TESTS_H
 
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
+int			test_simple( void );
+int			test_fds( void );
+
+#endif
