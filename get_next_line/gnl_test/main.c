@@ -24,7 +24,7 @@ int	main(void)
 
 	line = NULL;
 	x = 1;
-	fd = open("./bible.txt", O_RDONLY);
+	fd = open("./empty.txt", O_RDONLY);
 	/* fd = open("./test.txt", O_RDONLY); */
 	total = 0;
 printf("--------------------------------------------\n");
@@ -38,7 +38,7 @@ printf("--------------------------------------------\n");
 		total++;
 printf("--------------------------------------------\n");
 	}
-printf("BUFF_SIZE is set to [%ld]\n", BUFF_SIZE);
+printf("BUFF_SIZE is set to [%d]\n", BUFF_SIZE);
 printf("Total chars in file [4351186]\n");
 printf("Total lines printed [%d]\n", total);
 	

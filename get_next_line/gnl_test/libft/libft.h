@@ -37,22 +37,23 @@ typedef	struct		s_list
 }					t_list;
 
 
-typedef struct		s_over
-{
-	int				x;
-	int				y;
-	int				z;
-	int				n;
-	int				i;
-	int				who; /* = RUSAGE_SELF; */
-	struct rusage	usage;
-	int 			usage_time;
-	float			start_time; /* = (float)clock()/CLOCKS_PER_SEC; */
-	float			end_time; /* = (float)clock()/CLOCKS_PER_SEC; */
-	float			elapsed_time; /* = endTime - startTime; */
-}					t_over;
+/* typedef struct		s_over */
+/* { */
+/* 	int				x; */
+/* 	int				y; */
+/* 	int				z; */
+/* 	int				n; */
+/* 	int				i; */
+/* 	int				who; /1* = RUSAGE_SELF; *1/ */
+/* 	struct rusage	usage; */
+/* 	int 			usage_time; */
+/* 	float			start_time; /1* = (float)clock()/CLOCKS_PER_SEC; *1/ */
+/* 	float			end_time; /1* = (float)clock()/CLOCKS_PER_SEC; *1/ */
+/* 	float			elapsed_time; /1* = endTime - startTime; *1/ */
+/* }					t_over; */
 
-int					get_next_line(const int fd, char **line, t_over *over);
+/* int					get_next_line(const int fd, char **line, t_over *over); */
+int					get_next_line(const int fd, char **line);
 
 void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
