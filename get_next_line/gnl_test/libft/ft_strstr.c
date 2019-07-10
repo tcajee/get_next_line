@@ -3,35 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnkambul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/11 11:45:27 by lnkambul          #+#    #+#             */
-/*   Updated: 2019/06/19 13:24:52 by lnkambul         ###   ########.fr       */
+/*   Created: 2019/05/23 10:39:08 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/17 11:23:38 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char				*ft_strstr(const char *haystack, const char *needle)
+char	*ft_strstr(const char *haystack, const char *needle)
 {
-	unsigned int	i;
-	char			*s;
+	int i;
 
 	i = 0;
-	if (ft_strlen(needle) == 0)
-		return ((char *)haystack);
+	FT_(needle[0] == '\0', ((char *)haystack));
 	while (haystack[i])
 	{
-		if (haystack[i] == needle[0])
-		{
-			s = ft_strsub(haystack, i, ft_strlen(needle));
-			if (ft_strcmp(s, needle) == 0)
-			{
-				ft_strdel(&s);
-				return ((char *)&haystack[i]);
-			}
-			ft_strdel(&s);
-		}
+		FT_(haystack[i] == needle[0] && (ft_strncmp(&haystack[i], needle, \
+						ft_strlen(needle))) == 0, ((char *)&haystack[i]));
 		i++;
 	}
 	return (NULL);

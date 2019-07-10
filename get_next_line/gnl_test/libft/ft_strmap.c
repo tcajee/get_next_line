@@ -3,30 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnkambul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 11:44:24 by lnkambul          #+#    #+#             */
-/*   Updated: 2019/06/19 13:18:41 by lnkambul         ###   ########.fr       */
+/*   Created: 2019/05/29 15:19:54 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/17 11:06:15 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strmap(const char *s, char (*f)(char))
+char	*ft_strmap(char const *s, char (*f)(char))
 {
-	int		i;
-	char	*n;
+	char *cursor;
+	char *new;
 
-	i = 0;
-	if (!s || !f)
-		return (NULL);
-	n = ft_strdup(s);
-	if (!n)
-		return (NULL);
-	while (n[i] != '\0')
+	new = NULL;
+	if (s && f)
 	{
-		n[i] = (*f)(n[i]);
-		i++;
+		FT_(!(new = ft_strnew(ft_strlen(s))), NULL);
+		cursor = new;
+		while (*s)
+			*cursor++ = f(*s++);
 	}
-	return (n);
+	return (new);
 }

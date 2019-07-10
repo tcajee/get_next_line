@@ -3,35 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnkambul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/22 15:51:34 by lnkambul          #+#    #+#             */
-/*   Updated: 2019/06/19 14:55:22 by lnkambul         ###   ########.fr       */
+/*   Created: 2019/05/21 14:52:36 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/27 16:19:57 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int				ft_atoi(const char *s)
+int	ft_atoi(const char *str)
 {
-	int			n;
-	long long	r;
-	char		*p;
+	long		res;
+	long		sign;
+	const char	*input;
 
-	n = 1;
-	r = 0;
-	p = (char *)s;
-	p = ft_whitespace_skipper(p);
-	if (*p == '-' || *p == '+')
+	res = 0;
+	input = str;
+	sign = 1;
+	if (str)
 	{
-		if (*p == '-')
-			n = n * -1;
-		p++;
+		while (ft_isspace(*input) == 1)
+			input++;
+		if (*input == '-' || *input == '+')
+		{
+			if (*input == '-')
+				sign = -1;
+			input++;
+		}
+		while (*input && ft_isdigit(*input))
+			res = res * 10 + (*input++ - '0');
 	}
-	while (ft_isdigit(*p))
-	{
-		r = (r * 10) + ((*p) - 48);
-		p++;
-	}
-	return (r * n);
+	return ((int)res * (int)sign);
 }

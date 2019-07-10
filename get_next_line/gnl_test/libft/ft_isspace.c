@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_iswhitespace.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/08 16:14:39 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/13 12:40:17 by tcajee           ###   ########.fr       */
+/*   Created: 2019/06/08 18:29:20 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/17 10:33:38 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(t_list *elem))
+int	ft_isspace(int c)
 {
-	while (lst && f)
-	{
-		f(lst);
-		lst = lst->next;
-	}
+	return (((c >= '\t' && c <= '\r') || c == ' '));
 }

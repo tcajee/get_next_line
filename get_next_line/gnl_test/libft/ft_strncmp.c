@@ -3,38 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnkambul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/08 14:35:00 by lnkambul          #+#    #+#             */
-/*   Updated: 2019/06/19 13:20:35 by lnkambul         ###   ########.fr       */
+/*   Created: 2019/05/23 10:35:23 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/27 16:38:58 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int					ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	unsigned int	i;
-	unsigned char	*a;
-	unsigned char	*b;
+	int		result;
 
-	i = 0;
-	a = (unsigned char *)s1;
-	b = (unsigned char *)s2;
-	if (a[i] == '\0' && b[i] == '\0')
-		return (0);
-	while (a[i] != '\0' && b[i] != '\0' && n > 0)
+	result = 0;
+	if (s1 && s2)
 	{
-		if (a[i] > b[i])
-			return (1);
-		else if (a[i] < b[i])
-			return (-1);
-		i++;
-		n--;
+		if (n > ft_strlen(s1))
+			n = ft_strlen(s1) + 1;
+		if (n > ft_strlen(s2))
+			n = ft_strlen(s2) + 1;
+		result = ft_memcmp(s1, s2, n);
+		FT_(result > 0, 1);
+		FT_(result < 0, -1);
 	}
-	if ((a[i] == '\0' && (b[i] != '\0') && n > 0))
-		return (-1);
-	else if ((a[i] != '\0' && b[i] == '\0') && n > 0)
-		return (1);
-	return (0);
+	return (result);
 }

@@ -3,39 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnkambul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 13:18:16 by lnkambul          #+#    #+#             */
-/*   Updated: 2019/06/19 15:54:57 by lnkambul         ###   ########.fr       */
+/*   Created: 2019/06/06 15:38:25 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/28 13:45:58 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char					*ft_itoa(int i)
+char	*ft_itoa(int n)
 {
-	char				*r;
-	unsigned int		c;
-	long				a;
+	char	*string;
+	int		x;
+	size_t	i;
 
-	c = 0;
-	a = (long)i;
-	a *= (a < 0) ? -1 : 1;
-	while (a > 0)
+	i = 0;
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	else if (n == 0)
+		return (ft_strdup("0"));
+	else if (n < 0)
+		x = n * -1;
+	else
+		x = n;
+	string = ft_strnew(12);
+	FT_(!string, NULL);
+	while (x > 0)
 	{
-		a /= 10;
-		c++;
+		string[i++] = (x % 10) + 48;
+		x /= 10;
 	}
-	if (!(r = (i <= 0) ? ft_strnew(++c) : ft_strnew(c)))
-		return (NULL);
-	r[0] = (i < 0) ? '-' : r[0];
-	r = (i == 0) ? ft_strdup("0") : r;
-	a = (long)i;
-	a *= (a < 0) ? -1 : 1;
-	while (a > 0)
-	{
-		r[--c] = (a % 10) + '0';
-		a /= 10;
-	}
-	return (r);
+	if (n < 0)
+		string[i] = '-';
+	string = ft_strcpy(ft_strnew(ft_strlen(string)), ft_strrev(string));
+	return (string);
 }

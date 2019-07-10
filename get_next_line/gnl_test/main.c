@@ -6,16 +6,14 @@
 /*   By: tcajee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 17:29:40 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/06 04:09:35 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/07/10 08:58:20 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "./libft/libft.h"
 #include <stdio.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h>
-#include <stdlib.h>
 
 int	main(void)
 {

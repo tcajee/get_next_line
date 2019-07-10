@@ -3,30 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnkambul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/18 17:10:09 by lnkambul          #+#    #+#             */
-/*   Updated: 2019/06/19 12:48:08 by lnkambul         ###   ########.fr       */
+/*   Created: 2019/06/08 16:17:37 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/13 12:41:34 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list		*next;
-	t_list		*head;
+	t_list	*head;
+	t_list	*copy;
+	t_list	*next;
 
-	if (!(next = ft_lstnew(f(lst)->content, f(lst)->content_size)))
-		return (NULL);
-	head = next;
-	lst = lst->next;
-	while (lst)
+	head = NULL;
+	if (lst && f)
 	{
-		if (!(next->next = ft_lstnew(f(lst)->content, f(lst)->content_size)))
-			return (NULL);
-		next = next->next;
+		copy = f(lst);
+		FT_(!(next = ft_lstnew(copy->content, copy->content_size)), NULL);
+		head = next;
 		lst = lst->next;
+		while (lst)
+		{
+			copy = f(lst);
+			FT_(!(next->next = \
+						ft_lstnew(copy->content, copy->content_size)), NULL);
+			next = next->next;
+			lst = lst->next;
+		}
 	}
 	return (head);
 }

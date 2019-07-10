@@ -3,38 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnkambul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/29 09:55:59 by lnkambul          #+#    #+#             */
-/*   Updated: 2019/06/19 14:13:49 by lnkambul         ###   ########.fr       */
+/*   Created: 2019/05/30 16:03:32 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/17 11:25:41 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char				*ft_strtrim(const char *s)
+char	*ft_strtrim(char const *s)
 {
-	unsigned int	ws;
-	unsigned int	i;
-	size_t			j;
-	char			*n;
+	const char	*start;
+	const char	*end;
+	char		*new;
+	size_t		len;
 
-	if (!s)
-		return (NULL);
-	if (s[0] == '\0')
-		return ((char *)s);
-	ws = 0;
-	i = 0;
-	while (s[i] == 32 || s[i] == '\t' || s[i] == '\n')
+	new = NULL;
+	if (s)
 	{
-		i++;
-		ws++;
+		len = 0;
+		end = (s + (ft_strlen(s)));
+		while (ft_isspace(*s) == 1 && *s)
+			s++;
+		start = s;
+		while (ft_isspace(*(end - 1)) == 1 && end != s)
+			end--;
+		while (s++ != end)
+			len++;
+		FT_(!(new = ft_strsub(start, 0, len)), NULL);
 	}
-	j = ft_strlen(s) - 1;
-	while ((s[j] == 32 || s[j] == '\t' || s[j] == '\n') && (j-- > i))
-		ws++;
-	j = (unsigned int)ft_strlen(s) - ws;
-	if (!(n = ft_strsub(s, i, j)))
-		return (NULL);
-	return (n);
+	return (new);
 }

@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strmapi.c                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnkambul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/08 13:05:26 by lnkambul          #+#    #+#             */
-/*   Updated: 2019/06/19 13:19:20 by lnkambul         ###   ########.fr       */
+/*   Created: 2019/05/30 09:55:21 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/27 16:28:03 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char				*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned int	i;
-	char			*t;
-	char			*p;
+	size_t	i;
+	char	*cursor;
+	char	*new;
 
-	if (!s || !f)
-		return (NULL);
-	i = 0;
-	t = (char *)ft_strdup(s);
-	if (!t)
-		return (NULL);
-	p = t;
-	while (t[i])
+	new = NULL;
+	if (s && f)
 	{
-		t[i] = (*f)((i), (t[i]));
-		i++;
+		i = 0;
+		FT_(!(new = ft_strnew(ft_strlen(s))), NULL);
+		cursor = new;
+		while (*s)
+			*cursor++ = f(i++, *s++);
 	}
-	return (p);
+	return (new);
 }

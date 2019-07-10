@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memmove.c                                          :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnkambul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/06 14:43:59 by lnkambul          #+#    #+#             */
-/*   Updated: 2019/06/19 13:49:23 by lnkambul         ###   ########.fr       */
+/*   Created: 2019/05/26 11:21:02 by tcajee            #+#    #+#             */
+/*   Updated: 2019/06/27 16:16:09 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t		l;
+	size_t			i;
+	unsigned char	*dst_h;
+	unsigned char	*src_h;
 
-	l = 0;
-	if (src < dst && (src || dst))
+	if (src && dst)
 	{
-		while (len > 0)
+		i = -1;
+		dst_h = (unsigned char *)dst;
+		src_h = (unsigned char *)src;
+		if (dst_h < src_h)
 		{
-			len--;
-			((unsigned char *)dst)[len] = ((unsigned char *)src)[len];
+			while (++i < len)
+				dst_h[i] = src_h[i];
 		}
-	}
-	else
-	{
-		while (l < len && (src || dst))
+		else if (dst_h > src_h)
 		{
-			((unsigned char *)dst)[l] = ((unsigned char *)src)[l];
-			l++;
+			while (len-- > 0)
+				dst_h[len] = src_h[len];
 		}
 	}
 	return (dst);

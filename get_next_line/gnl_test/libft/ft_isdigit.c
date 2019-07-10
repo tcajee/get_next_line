@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isdigit.c                                          :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lnkambul <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 11:30:54 by lnkambul          #+#    #+#             */
-/*   Updated: 2019/05/23 11:35:16 by lnkambul         ###   ########.fr       */
+/*   Created: 2019/05/21 14:32:20 by tcajee            #+#    #+#             */
+/*   Updated: 2019/05/21 14:43:00 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_isdigit(const int c)
+int	ft_isdigit(int c)
 {
-	if (c > 47 && c < 58)
-		return (1);
-	return (0);
+	return (c < 58 && c > 47);
 }
