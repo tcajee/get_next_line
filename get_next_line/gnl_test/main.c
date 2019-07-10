@@ -6,7 +6,7 @@
 /*   By: tcajee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 17:29:40 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/10 08:58:20 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/07/10 09:58:42 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	main(void)
 	line = NULL;
 	x = 1;
 	fd = open("./bible.txt", O_RDONLY);
+	/* fd = open("./test.txt", O_RDONLY); */
 	total = 0;
 printf("--------------------------------------------\n");
 	while (x > 0)
@@ -37,7 +38,7 @@ printf("--------------------------------------------\n");
 		total++;
 printf("--------------------------------------------\n");
 	}
-printf("BUFF_SIZE is set to [%d]\n", BUFF_SIZE);
+printf("BUFF_SIZE is set to [%ld]\n", BUFF_SIZE);
 printf("Total chars in file [4351186]\n");
 printf("Total lines printed [%d]\n", total);
 	

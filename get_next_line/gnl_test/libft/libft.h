@@ -6,7 +6,7 @@
 /*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 12:27:09 by tcajee            #+#    #+#             */
-/*   Updated: 2019/07/10 09:03:21 by tcajee           ###   ########.fr       */
+/*   Updated: 2019/07/10 13:50:50 by tcajee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <string.h>
 # include <unistd.h>
 # define FT_(x, y) if (x) return y;
-# define BUFF_SIZE 1
+# define BUFF_SIZE 64
 # if defined(__APPLE__) && defined(__MACH__)
 #  define FT_OPEN_MAX 4864
 # elif defined(__linux__)
@@ -36,7 +36,23 @@ typedef	struct		s_list
 	struct s_list	*next;
 }					t_list;
 
-int					get_next_line(const int fd, char **line);
+
+typedef struct		s_over
+{
+	int				x;
+	int				y;
+	int				z;
+	int				n;
+	int				i;
+	int				who; /* = RUSAGE_SELF; */
+	struct rusage	usage;
+	int 			usage_time;
+	float			start_time; /* = (float)clock()/CLOCKS_PER_SEC; */
+	float			end_time; /* = (float)clock()/CLOCKS_PER_SEC; */
+	float			elapsed_time; /* = endTime - startTime; */
+}					t_over;
+
+int					get_next_line(const int fd, char **line, t_over *over);
 
 void				ft_bzero(void *s, size_t n);
 void				*ft_memset(void *b, int c, size_t len);
