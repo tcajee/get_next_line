@@ -21,9 +21,11 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 	if (s)
 	{
 		i = -1;
-		FT_(!(new = ft_strnew(len)), NULL);
+		/* FT_(!(new = ft_strnew(len)), NULL); */
+		new = (char *)malloc(sizeof(char) * (len + 1));
 		while (++i < len && s[i])
 			new[i] = s[start + i];
+		new[i] = '\0';
 	}
 	return (new);
 }

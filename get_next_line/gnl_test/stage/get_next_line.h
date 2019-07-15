@@ -3,18 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za   +#+  +:+       +#+        */
+/*   By: sminnaar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/26 15:12:57 by lnkambul          #+#    #+#             */
-/*   Updated: 2019/07/06 21:06:08 by lnkambul         ###   ########.fr       */
+/*   Created: 2019/07/01 11:45:05 by sminnaar          #+#    #+#             */
+/*   Updated: 2019/07/02 18:08:55 by sminnaar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-/* # define BUFF_SIZE 32 */
-#include "libft/libft.h"
+# define BUFF_SIZE 1
+# define FD_MAX 1024
 
-int		get_next_line(const int fd, char **line);
+# include "libft/includes/libft.h"
+# include <fcntl.h>
+
+int	get_next_line(const int fd, char **line);
 
 #endif

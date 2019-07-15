@@ -16,7 +16,7 @@
 # include <string.h>
 # include <unistd.h>
 # define FT_(x, y) if (x) return y;
-# define BUFF_SIZE 64
+# define BUFF_SIZE 1024
 # if defined(__APPLE__) && defined(__MACH__)
 #  define FT_OPEN_MAX 4864
 # elif defined(__linux__)
@@ -26,6 +26,7 @@
 typedef struct		s_files
 {
 	char			*file[FT_OPEN_MAX + 1];
+	char			*line;
 	int				fd;
 }					t_files;
 

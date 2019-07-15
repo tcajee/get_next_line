@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: sminnaar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 10:39:08 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/17 11:23:38 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/29 12:27:32 by sminnaar          #+#    #+#             */
+/*   Updated: 2019/06/06 12:59:20 by sminnaar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,19 @@
 
 char	*ft_strstr(const char *haystack, const char *needle)
 {
-	int i;
+	size_t hlen;
+	size_t nlen;
 
-	i = 0;
-	FT_(needle[0] == '\0', ((char *)haystack));
-	while (haystack[i])
+	hlen = ft_strlen(haystack);
+	nlen = ft_strlen(needle);
+	if (!*needle)
+		return ((char *)haystack);
+	while (nlen <= hlen && *haystack)
 	{
-		FT_(haystack[i] == needle[0] && (ft_strncmp(&haystack[i], needle, \
-						ft_strlen(needle))) == 0, ((char *)&haystack[i]));
-		i++;
+		if (!(ft_strncmp(haystack, needle, nlen)))
+			return ((char *)haystack);
+		++haystack;
+		--hlen;
 	}
 	return (NULL);
 }

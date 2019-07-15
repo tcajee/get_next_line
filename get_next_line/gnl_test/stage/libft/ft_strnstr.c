@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: sminnaar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 13:58:02 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/13 14:44:27 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/29 13:25:18 by sminnaar          #+#    #+#             */
+/*   Updated: 2019/05/29 13:33:11 by sminnaar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,20 @@
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	size_t		minsize;
-	const char	*cursor;
+	size_t hlen;
+	size_t nlen;
 
-	minsize = ft_strlen(needle);
-	cursor = haystack;
-	FT_(minsize == 0, ((char *)haystack));
-	while (*cursor && (cursor + minsize) <= (haystack + len))
+	hlen = ft_strlen(haystack);
+	nlen = ft_strlen(needle);
+	if (!*needle)
+		return ((char *)haystack);
+	while (nlen <= hlen && *haystack && len >= nlen)
 	{
-		FT_(*cursor == *needle && \
-				ft_strncmp(cursor, needle, minsize) == 0, (char *)cursor);
-		cursor++;
+		if (!(ft_strncmp(haystack, needle, nlen)))
+			return ((char *)haystack);
+		++haystack;
+		--hlen;
+		--len;
 	}
 	return (NULL);
 }

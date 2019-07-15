@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcajee <tcajee@student.wethinkcode.co.za>  +#+  +:+       +#+        */
+/*   By: sminnaar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 08:33:30 by tcajee            #+#    #+#             */
-/*   Updated: 2019/06/27 15:58:08 by tcajee           ###   ########.fr       */
+/*   Created: 2019/05/24 14:41:36 by sminnaar          #+#    #+#             */
+/*   Updated: 2019/05/27 15:09:19 by sminnaar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 
 char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
-	if (src)
-		FT_(ft_strlen(src) < len, ft_memcpy(\
-					ft_memset(dst, '\0', len), src, ft_strlen(src)));
-	return (ft_memcpy(dst, src, len));
+	size_t	i;
+
+	i = 0;
+	while (src[i] && i < len)
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	while (i < len)
+	{
+		dst[i] = '\0';
+		i++;
+	}
+	return (dst);
 }

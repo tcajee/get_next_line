@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbotes <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: sminnaar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/28 15:29:37 by mbotes            #+#    #+#             */
-/*   Updated: 2019/05/29 08:28:05 by mbotes           ###   ########.fr       */
+/*   Created: 2019/05/29 13:52:27 by sminnaar          #+#    #+#             */
+/*   Updated: 2019/05/31 08:05:55 by sminnaar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strndup(const char *str, size_t len)
+char	*ft_strndup(const char *s, size_t n)
 {
-	char	*new;
+	char *str;
 
-	if (!(new = ft_strnew(len)))
+	str = (char *)malloc(sizeof(char) * n + 1);
+	if (str == NULL)
 		return (NULL);
-	ft_strncpy(new, str, len + 1);
-	new[len] = '\0';
-	return (new);
+	str = ft_strncpy(str, s, n);
+	str[n] = '\0';
+	return (str);
 }
