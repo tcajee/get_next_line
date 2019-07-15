@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
+#include "./get_next_line.h"
 #include <stdio.h>
 #include <sys/stat.h>
 #include <fcntl.h>
@@ -33,7 +33,7 @@ printf("--------------------------------------------\n");
 printf("--------------------------------------------\n");
 		x = get_next_line(fd, &line);
 		printf("[%d] line: %s\n", x, line);
-		ft_strdel(&line);
+		free(line);
 		line = NULL;
 		total++;
 printf("--------------------------------------------\n");
