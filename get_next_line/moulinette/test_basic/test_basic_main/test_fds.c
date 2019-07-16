@@ -57,8 +57,8 @@ printf("	----------		DUP2			----------\n");
 	/* fdin = dup2(fdin, max); */
 	/* printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, max); */
 	
-	fdin = dup2(fdin, 1023);
-	printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1023);
+	fdin = dup2(fdin, 1024);
+	printf("	fdin = [%d] = dup2(fdin, [%d]);\n", fdin, 1024);
 
 	/* printf("	fcntl(old-filedes, F_DUPFD, new-filedes)\n"); */
 	/* printf("	fdin = [%d] = open(test1.in, O_RDONLY);\n", fdin); */
